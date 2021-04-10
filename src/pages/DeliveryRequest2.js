@@ -1,14 +1,14 @@
-import Item from './Item';
-import { useHistory } from 'react-router-dom';
-import { editedItems } from './EditItems';
-import { requestFor } from './ViewRequests';
+import Item from "./Item";
+import { useHistory } from "react-router-dom";
+import { editedItems } from "./EditItems";
+import { requestFor } from "./ViewRequests";
 
 export let initialItems = [];
 export default function DeliveryRequest2() {
   const history = useHistory();
   const sentMsg = [
     requestFor +
-      ',I am about to get you your groceries for this week, you specified you need: Organic Milk - 1 gallon Yoghurt - 1 Do you want anything changed?',
+      ",I am about to get you your groceries for this week, you specified you need: Organic Milk - 1 gallon Yoghurt - 1 Do you want anything changed?",
   ];
 
   const chat = {
@@ -17,10 +17,10 @@ export default function DeliveryRequest2() {
     received: [],
   };
   const itemList = [
-    { itemName: 'Organic Milk', itemQty: 1 },
-    { itemName: 'Orange', itemQty: 1 },
+    { itemName: "Organic Milk", itemQty: 1 },
+    { itemName: "Orange", itemQty: 1 },
   ];
-  console.log('Edited Items', editedItems);
+  console.log("Edited Items", editedItems);
   //   if (editedItems.length == 0) initialItems = itemList;
   //   else initialItems = editedItems;
   initialItems = editedItems.length == 0 ? itemList : editedItems;
@@ -30,27 +30,28 @@ export default function DeliveryRequest2() {
       !event.target.elements.yoghurt_available.checked
     ) {
       alert(
-        'You have not checked all the items. Are you sure you want to mark the Request as Done?'
+        "You have not checked all the items. Are you sure you want to mark the Request as Done?"
       );
-      history.push('/view-volunteer-requests');
+      history.push("/view-volunteer-requests");
     } else if (
       event.target.elements.milk_available.checked &&
       event.target.elements.yoghurt_available.checked
     ) {
-      alert(' Are you sure you want to mark the Request as Done?');
-      history.push('/view-volunteer-requests');
+      alert(" Are you sure you want to mark the Request as Done?");
+      history.push("/view-volunteer-requests");
     }
     event.preventDefault();
   }
 
   function clickDone() {
-    alert(' Are you sure you want to mark the Request as Done?');
-    history.push('/view-volunteer-requests');
+    alert(" Are you sure you want to mark the Request as Done?");
+    history.push("/view-volunteer-requests");
   }
   function callAlert() {
-    alert(' Are you sure you want to Call? Standard Carrier charges apply!');
+    // alert(" Are you sure you want to Call? Standard Carrier charges apply!");
     // TODO: Disable volunteer and Redirect to Dashboard
-    history.push('/delivery-request-active');
+    // history.push("/delivery-request-active");
+    history.push("/info");
   }
   return (
     <>
@@ -58,7 +59,7 @@ export default function DeliveryRequest2() {
         <i
           className="icon-left-open back"
           onClick={() => {
-            history.push('/view-volunteer-requests');
+            history.push("/view-volunteer-requests");
           }}
         ></i>
       </div>
@@ -74,7 +75,7 @@ export default function DeliveryRequest2() {
         ))}
         <div class="proceed-button" align="center">
           <input
-            onClick={() => history.push('/edit-item-list')}
+            onClick={() => history.push("/edit-item-list")}
             type="submit"
             className="btn-primary btn"
             value="Edit Items"
@@ -123,12 +124,12 @@ export default function DeliveryRequest2() {
                 </th>
                 <th>
                   <div className="library-fontello" onClick={callAlert}>
-                    <i class="icon-phone"></i> Call{" "}
+                    <i class="icon-help-circled"></i> Help{" "}
                   </div>
                 </th>
                 <th>
                   <div className="library-fontello" onClick={clickDone}>
-                    <i className="icon-basket"></i> Done{' '}
+                    <i className="icon-basket"></i> Done{" "}
                   </div>
                 </th>
               </tr>

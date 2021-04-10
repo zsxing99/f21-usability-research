@@ -1,7 +1,7 @@
 body {
   background: #d5d5d8;
-  background-image: url('../logo_light.png');
-  font-family: 'Lato';
+  background-image: url("../logo_light.png");
+  font-family: "Lato";
 }
 
 .container {
@@ -61,6 +61,15 @@ h3 {
   font-size: 12px;
   line-height: 23px;
   color: #000000;
+}
+
+h4 {
+  width: 350px;
+  height: 23px;
+  /* font-weight: bold; */
+  font-size: 20px;
+  /* line-height: 23px; */
+  color: #fd0000;
 }
 
 p {
@@ -156,31 +165,31 @@ p {
 }
 
 .profile {
-  background-image: url('./default-profile.png');
+  background-image: url("./default-profile.png");
 }
 
 .mary {
-  background-image: url('./mary.png');
+  background-image: url("./mary.png");
 }
 
 .paul {
-  background-image: url('./paul.png');
+  background-image: url("./paul.png");
 }
 
 .default-picture {
-  background-image: url('./default.png');
+  background-image: url("./default.png");
 }
 
 .milk {
-  background-image: url('./milk.png');
+  background-image: url("./milk.png");
 }
 
 .yogurt {
-  background-image: url('./yogurt.png');
+  background-image: url("./yogurt.png");
 }
 
 .orange {
-  background-image: url('./orange.png');
+  background-image: url("./orange.png");
 }
 
 .quantity {
@@ -464,6 +473,27 @@ div.end {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.233);
   padding: 10px;
   background: rgba(255, 255, 255, 0.555);
+}
+
+.volunteer-lock-message {
+  border: 1px solid #ff0000;
+  /* align-items: center; */
+  border-radius: 10px;
+  /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.233); */
+  padding: 5px;
+  padding-left: 30px;
+  background: rgba(255, 255, 255, 0.555);
+}
+
+.volunteer-dashboard-option-locked {
+  margin-top: 20%;
+  opacity: 50%;
+  border: 0px solid #ffffff;
+  border-radius: 50px;
+  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.479);
+  padding: 10px;
+  align-content: center;
+  background: rgba(255, 255, 255, 0.363);
 }
 
 .volunteer-dashboard-option-text {

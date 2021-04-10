@@ -1,8 +1,9 @@
 import Calendar from "../calendar/Calendar";
 import { useHistory } from "react-router-dom";
+import React, { useState } from "react";
 
 export let disableVolunteerFlag = false;
-export default function AvailablityHealthStatus() {
+export default function AvailablityHealthStatus(props) {
   const history = useHistory();
 
   function handleSubmit(event) {
@@ -14,10 +15,13 @@ export default function AvailablityHealthStatus() {
       event.target.elements.fatigue.checked ||
       event.target.elements.bodyaches.checked
     ) {
+      // console.log(volunteerLock);
+      props.setVolunteerLock(true);
       alert(
-        "Covid Symptoms observed.You are not Eligible for Volunteering. Account Disable for 14 days"
+        "Covid Symptoms observed. You are not Eligible for Volunteering. Account Disable for 14 days"
       );
-      history.push("/login");
+      // history.push("/login");
+      history.push("/locked", { lock: true });
       disableVolunteerFlag = true;
     } else {
       alert("Data Updated");

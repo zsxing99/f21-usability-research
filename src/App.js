@@ -6,6 +6,8 @@ import ItemListSub from "./pages/ItemListSub.js";
 
 import VolunteerSignup from "./pages/VolunteerSignup";
 import AvailabilityHealthStatus from "./pages/Availablity-HealthStatus";
+import LockedVolunteer from "./pages/Locked-Volunteer";
+import InfoPage from "./pages/Info";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/App.css";
@@ -39,6 +41,7 @@ import { useState } from "react";
 
 function App() {
   const [requests, setRequests] = useState([]);
+  const [volunteerLock, setVolunteerLock] = useState(false);
 
   return (
     <Container
@@ -46,12 +49,22 @@ function App() {
         maxWidth: "576px",
         height: "100vh",
         margin: "auto",
-        marginTop: '6vh'
+        marginTop: "6vh",
       }}
     >
       <Router>
         <Switch>
-          <Route exact path="/" render={() => <Login />}></Route>
+          <Route
+            exact
+            path="/"
+            render={() => <VolunteerDashboard lock={volunteerLock} />}
+          ></Route>
+          <Route
+            exact
+            path="/locked"
+            render={() => <LockedVolunteer lock={volunteerLock} />}
+          ></Route>
+          <Route exact path="/info" render={() => <InfoPage />}></Route>
           <Route
             exact
             path="/item-list"
@@ -149,7 +162,9 @@ function App() {
           <Route
             exact
             path="/edit-volunteer-data"
-            render={() => <AvailabilityHealthStatus />}
+            render={() => (
+              <AvailabilityHealthStatus setVolunteerLock={setVolunteerLock} />
+            )}
           ></Route>
           <Route
             exact
