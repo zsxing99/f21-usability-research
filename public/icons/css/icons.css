@@ -1,0 +1,72 @@
+@font-face {
+  font-family: "fontello";
+  src: url("../fonts/fontello.eot");
+  src: url("../fonts/fontello.eot?#iefix") format("embedded-opentype"),
+    url("../fonts/fontello.woff") format("woff"),
+    url("../fonts/fontello.ttf") format("truetype"),
+    url("../fonts/fontello.svg#") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.library-fontello [class^="icon-"],
+.library-fontello [class*="icon-"] {
+  font-family: "fontello";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-basket:before {
+  content: "\e03a";
+}
+.icon-calendar:before {
+  content: "\e10b";
+}
+.icon-cancel-circled:before {
+  content: "\e04c";
+}
+.icon-clipboard:before {
+  content: "\e07f";
+}
+.icon-comment-alt:before {
+  content: "\e0a3";
+}
+.icon-home:before {
+  content: "\e0e0";
+}
+.icon-left-open:before {
+  content: "\e0cd";
+}
+.icon-location:before {
+  content: "\e07a";
+}
+.icon-ok:before {
+  content: "\e070";
+}
+.icon-pencil:before {
+  content: "\e068";
+}
+.icon-phone:before {
+  content: "\e065";
+}
+.icon-plus-circled:before {
+  content: "\e059";
+}
+.icon-right-open:before {
+  content: "\e0cc";
+}
+.icon-torso:before {
+  content: "\e01c";
+}
+.icon-trash:before {
+  content: "\e01b";
+}
+.icon-user-plus:before {
+  content: "\f234";
+}

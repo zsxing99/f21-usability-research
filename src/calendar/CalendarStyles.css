@@ -1,0 +1,15 @@
+/* adjusting the built-in theme */
+
+/* calendar event */
+.calendar_default_event_inner {
+  background: #aa767c;
+  color: #fff;
+  border: none;
+  font-size: 10pt;
+  padding: 5px;
+  opacity: 0.8;
+}
+
+.modal_default_main {
+  margin-left: -190px !important;
+}
