@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import {
-  DayPilot,
-  DayPilotCalendar,
-} from "daypilot-pro-react";
+import { DayPilot, DayPilotCalendar } from "daypilot-pro-react";
 import "./CalendarStyles.css";
 
 const styles = {
@@ -46,22 +43,29 @@ class Calendar extends Component {
       timeRangeSelectedHandling: "Enabled",
       onTimeRangeSelected: (args) => {
         let dp = this.calendar;
-        DayPilot.Modal.prompt("Create a new event:", "Available").then(
-          function (modal) {
-            dp.clearSelection();
-            if (!modal.result) {
-              return;
-            }
-            let eventDesc = {
-              id: DayPilot.guid(),
-              text: modal.result,
-              start: args.start,
-              end: args.end,
-              backColor: "#AA767C",
-            };
-            dp.events.add(new DayPilot.Event(eventDesc));
-          }
-        );
+        // DayPilot.Modal.prompt("Conform Availability").then(function (modal) {
+        //   dp.clearSelection();
+        //   let eventDesc = {
+        //     id: DayPilot.guid(),
+        //     text: "Available",
+        //     start: args.start,
+        //     end: args.end,
+        //     backColor: "#AA767C",
+        //   };
+        //   dp.events.add(new DayPilot.Event(eventDesc));
+        // });
+
+        // DayPilot.Modal.prompt("Conform Availability").then(function (modal) {
+        dp.clearSelection();
+        let eventDesc = {
+          id: DayPilot.guid(),
+          text: "Availabile",
+          start: args.start,
+          end: args.end,
+          backColor: "#AA767C",
+        };
+        dp.events.add(new DayPilot.Event(eventDesc));
+        // });
       },
       eventDeleteHandling: "Update",
       onEventClick: (args) => {
@@ -76,6 +80,7 @@ class Calendar extends Component {
           }
         );
       },
+      scrollToHour: 20,
     };
   }
 
@@ -83,7 +88,7 @@ class Calendar extends Component {
     // load event data
     this.setState({
       startDate: "2020-12-06",
-      events: eventList
+      events: eventList,
     });
   }
 

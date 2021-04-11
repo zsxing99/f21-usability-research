@@ -1,24 +1,24 @@
-import { useState } from 'react';
+import { useState } from "react";
 
-import { useHistory } from 'react-router-dom';
-import Calendar from '../calendar/calendar2';
+import { useHistory } from "react-router-dom";
+import Calendar from "../calendar/calendar2";
 
-export let requestFor = '';
+export let requestFor = "";
 
 export default function ViewRequests() {
   const history = useHistory();
-  const [r1status, setR1Status] = useState('Received');
-  const [r2status, setR2Status] = useState('Received');
+  const [r1status, setR1Status] = useState("Received");
+  const [r2status, setR2Status] = useState("Received");
 
   function handleSubmit(event) {
     event.preventDefault();
   }
 
   function handleListItem(e) {
-    if (e == 'request1') {
-      setR1Status('Done');
+    if (e == "request1") {
+      setR1Status("Done");
     } else {
-      setR2Status('Done');
+      setR2Status("Done");
     }
   }
 
@@ -28,7 +28,7 @@ export default function ViewRequests() {
         <i
           className="icon-left-open back"
           onClick={() => {
-            history.push('/volunteer-dashboard');
+            history.push("/volunteer-dashboard");
           }}
         ></i>
       </div>
@@ -40,9 +40,9 @@ export default function ViewRequests() {
           <div
             class="request-1-head"
             onClick={() => {
-              handleListItem('request2');
-              requestFor = 'Mary';
-              history.push('/delivery-request-active');
+              handleListItem("request2");
+              requestFor = "Mary";
+              history.push("/delivery-request-active");
             }}
           >
             <div class="picture mary">
@@ -60,9 +60,9 @@ export default function ViewRequests() {
           <div
             class="request-1-head"
             onClick={() => {
-              requestFor = 'Mary';
-              handleListItem('request1');
-              history.push('/delivery-request');
+              requestFor = "Mary";
+              handleListItem("request1");
+              history.push("/delivery-request");
             }}
           >
             <div class="picture mary"></div>
@@ -78,11 +78,11 @@ export default function ViewRequests() {
         {/* </div> */}
 
         <div align="center"></div>
-        <div class="ex1">
-          <div className="calendar">
-            <Calendar />
-          </div>
+        {/* <div class="ex1"> */}
+        <div className="calendar">
+          <Calendar />
         </div>
+        {/* </div> */}
       </div>
     </>
   );
