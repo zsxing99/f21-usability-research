@@ -9,14 +9,10 @@ import AvailabilityHealthStatus from "./pages/Availablity-HealthStatus";
 import LockedVolunteer from "./pages/Locked-Volunteer";
 import InfoPage from "./pages/Info";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/App.css";
 import EditItems from "./pages/EditItems";
 
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/App.css";
 import EditItem from "./pages/EditItem";
 
 import ViewRequests from "./pages/ViewRequests";
@@ -26,9 +22,6 @@ import DeliveryRequest from "./pages/DeliveryRequest";
 import Chat from "./pages/Chat";
 
 import Subscription from "./pages/Subscription";
-import Home from "./pages/Home";
-import NewRequestForm from "./pages/NewRequestForm";
-import VolunteerSelection from "./pages/VolunteerSelection";
 
 import {
   BrowserRouter as Router,
@@ -85,44 +78,6 @@ function App() {
                 {...props}
                 requests={requests}
                 setRequests={setRequests}
-              />
-            )}
-          ></Route>
-          <Route
-            exact
-            path="/subscribe"
-            render={(props) => (
-              <Subscription
-                {...props}
-                requests={requests}
-                setRequests={setRequests}
-              />
-            )}
-          ></Route>
-          <Route
-            exact
-            path="/user-home"
-            render={() => <Home requests={requests} />}
-          ></Route>
-          <Route
-            exact
-            path="/new-request/form"
-            render={(props) => (
-              <NewRequestForm
-                {...props}
-                requests={requests}
-                setRequests={setRequests}
-              />
-            )}
-          ></Route>
-          <Route
-            exact
-            path="/new-request/volunteer-selection"
-            render={(props) => (
-              <VolunteerSelection
-                {...props}
-                setRequests={setRequests}
-                requests={requests}
               />
             )}
           ></Route>
