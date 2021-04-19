@@ -1,4 +1,5 @@
 import Calendar from "../calendar/Calendar";
+import Tabs from "../components/Tabs";
 import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
@@ -46,6 +47,7 @@ export default function AvailablityHealthStatus(props) {
         <h1>Availability </h1>
         <h1>& Health Status</h1>
       </div>
+      <Tabs className="tab-list" selected="availability"></Tabs>
 
       <div className="body">
         <form onSubmit={handleSubmit}>

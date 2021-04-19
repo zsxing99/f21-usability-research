@@ -20,6 +20,7 @@ import ViewRequests2 from "./pages/ViewRequests2";
 import DeliveryRequest2 from "./pages/DeliveryRequest2";
 import DeliveryRequest from "./pages/DeliveryRequest";
 import Chat from "./pages/Chat";
+import Tabs from "./components/Tabs";
 
 import Subscription from "./pages/Subscription";
 

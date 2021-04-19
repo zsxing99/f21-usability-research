@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "../styles/App.css";
+import Tabs from "../components/Tabs";
 
 export default function VolunteerDashboard(props) {
   const history = useHistory();
@@ -24,6 +26,7 @@ export default function VolunteerDashboard(props) {
         </div> */}
       </div>
       <div className="title">Volunteer Dashboard</div>
+      <Tabs className="tab-list" selected="home"></Tabs>
       <div className="body">
         {props.lock ? (
           <div> You are locked out!</div>
