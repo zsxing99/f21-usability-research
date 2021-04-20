@@ -70,7 +70,7 @@ export default function Tabs(props) {
           Home
         </div>
         <div className={avaClass} onClick={goAvailability}>
-          Health Info & Availability
+          Volunteer Info
         </div>
         <div
           className={reqClass}
