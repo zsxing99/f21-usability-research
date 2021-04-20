@@ -55,7 +55,7 @@ export default function Tabs(props) {
   }
 
   function goAvailability(e) {
-    history.push("/edit-volunteer-data");
+    history.push("/volunteer-health");
   }
 
   function goHelp(e) {
@@ -64,9 +64,13 @@ export default function Tabs(props) {
 
   return (
     <>
-      <div className="tab-list">
+      <br></br>
+      <div align="center" className="tab-list">
         <div className={homeClass} onClick={goHome}>
           Home
+        </div>
+        <div className={avaClass} onClick={goAvailability}>
+          Health Info & Availability
         </div>
         <div
           className={reqClass}
@@ -74,9 +78,6 @@ export default function Tabs(props) {
           onClick={goRequests}
         >
           Requests
-        </div>
-        <div className={avaClass} onClick={goAvailability}>
-          Availability
         </div>
         <div className={helpClass} onClick={goHelp}>
           Help

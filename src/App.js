@@ -9,6 +9,7 @@ import AvailabilityHealthStatus from "./pages/Availablity-HealthStatus";
 import LockedVolunteer from "./pages/Locked-Volunteer";
 import InfoPage from "./pages/Info";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
+import HealthStatus from "./pages/HealthStatus";
 import EditItems from "./pages/EditItems";
 
 import Login from "./pages/Login";
@@ -121,6 +122,11 @@ function App() {
             render={() => (
               <AvailabilityHealthStatus setVolunteerLock={setVolunteerLock} />
             )}
+          ></Route>
+          <Route
+            exact
+            path="/volunteer-health"
+            render={() => <HealthStatus setVolunteerLock={setVolunteerLock} />}
           ></Route>
           <Route
             exact
