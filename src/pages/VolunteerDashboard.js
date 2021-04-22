@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import "../styles/App.css";
+import Tabs from "../components/Tabs";
 
 export default function VolunteerDashboard(props) {
   const history = useHistory();
@@ -24,6 +26,7 @@ export default function VolunteerDashboard(props) {
         </div> */}
       </div>
       <div className="title">Volunteer Dashboard</div>
+      <Tabs className="tab-list" selected="home"></Tabs>
       <div className="body">
         {props.lock ? (
           <div> You are locked out!</div>
@@ -37,8 +40,8 @@ export default function VolunteerDashboard(props) {
             <div align="center" className="library-fontello">
               <i className="icon-clipboard body-icons volunteer-action-shadow"></i>
             </div>
-            <h2 class="volunteer-dashboard-option-text">
-              Availability & Health Status
+            <h2 align="center" class="volunteer-dashboard-option-text">
+              Health Info & Availability
             </h2>
           </div>
         )}
@@ -53,7 +56,9 @@ export default function VolunteerDashboard(props) {
           <div align="center" className="library-fontello">
             <i className="icon-basket body-icons"></i>
           </div>
-          <h2 class="volunteer-dashboard-option-text-2">Requests</h2>
+          <h2 align="center" class="volunteer-dashboard-option-text-2">
+            Requests
+          </h2>
         </div>
       </div>
     </>
