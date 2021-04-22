@@ -10,7 +10,7 @@ export default function Tabs(props) {
     avaClass = "tab-list-item",
     helpClass = "tab-list-item",
     reqClass = "tab-list-item";
-  console.log(props.selected);
+  // console.log(props.selected);
   // const homeClass =
   //   "tab-list-item " + (props.selected === "home") ? "tab-list-active" : "";
   // const avaClass =
@@ -26,23 +26,23 @@ export default function Tabs(props) {
 
   switch (props.selected) {
     case "home":
-      console.log("home");
+      // console.log("home");
       homeClass += " tab-list-active";
       break;
     case "requests":
-      console.log("requests");
+      // console.log("requests");
       reqClass += " tab-list-active";
       break;
     case "availability":
-      console.log("home");
+      // console.log("home");
       avaClass += " tab-list-active";
       break;
     case "help":
-      console.log("home");
+      // console.log("home");
       helpClass += " tab-list-active";
       break;
     default:
-      console.log("home");
+      // console.log("home");
       homeClass += " tab-list-active";
   }
 

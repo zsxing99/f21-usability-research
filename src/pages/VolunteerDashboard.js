@@ -3,7 +3,12 @@ import { useHistory } from "react-router-dom";
 import "../styles/App.css";
 import Tabs from "../components/Tabs";
 
-export default function VolunteerDashboard(props) {
+import { withTracking } from 'react-tracker';
+import {
+  navigateTo
+} from "../tracking/events/events";
+
+function VolunteerDashboard(props) {
   const history = useHistory();
   return (
     <>
@@ -35,6 +40,8 @@ export default function VolunteerDashboard(props) {
             class="volunteer-dashboard-option"
             onClick={() => {
               history.push("/edit-volunteer-data");
+
+              props.trackNavigation("AVAILABILITY_HEALTH_STATUS");
             }}
           >
             <div align="center" className="library-fontello">
@@ -51,6 +58,8 @@ export default function VolunteerDashboard(props) {
           class="volunteer-dashboard-option"
           onClick={() => {
             history.push("/view-volunteer-requests");
+
+            props.trackNavigation("REQUESTS");
           }}
         >
           <div align="center" className="library-fontello">
@@ -64,3 +73,14 @@ export default function VolunteerDashboard(props) {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackNavigation: (pageName) =>
+      trackEvent(navigateTo(pageName)),
+  }
+}
+
+const VolunteerDashboardWithTracking = withTracking(mapTrackingToProps)(VolunteerDashboard);
+
+export default VolunteerDashboardWithTracking;

@@ -1,22 +1,75 @@
-import moment from "moment";
+import { step } from './eventTypes';
+import Interaction from './interactions';
 
 /**
- * get page view event object
- * @param {Number} friendId 
+ * NAVIGATION EVENTS
  */
-export const pageView = pageName => ({
-    type: "PAGE_VIEW",
-    data: {
-        pageName: pageName,
-        timestamp: moment().format()
-    }
-});
+export const navigateTo = (pageName) => {
+    return step(
+        pageName,
+        Interaction.NAVIGATION,
+        `User elected to navigate to ${pageName} page`
+    )
+};
 
-export const step = (pageName, action) => ({
-    type: "STEP",
-    data: {
-        pageName: pageName,
-        action: action,
-        timestamp: moment().format()
-    }
-})
+/**
+ * AVAILABILITY PAGE EVENTS
+ */
+export const availabilitySubmit = () => {
+    return step(
+        "AVAILABILITY",
+        Interaction.CLICK,
+        "User elected to submit their availiability changes."
+    )
+};
+
+export const availabilityChange = () => {
+    return step(
+        "AVAILABILITY",
+        Interaction.CLICK,
+        "User elected to change their availiability."
+    )
+}
+
+export const availabilityDetailChange = () => {
+    return step(
+        "AVAILABILITY",
+        Interaction.CLICK,
+        "User elected to change their availability details."
+    )
+}
+
+export const availabilityDetailSubmit = () => {
+    return step(
+        "AVAILABILITY",
+        Interaction.CLICK,
+        "User elected to submit their availability details changes."
+    )
+}
+
+export const availabilityDetailCancel = () => {
+    return step(
+        "AVAILABILITY",
+        Interaction.UNDO,
+        "User elected to undo their availability details changes."
+    )
+}
+
+/**
+ * HEALTH STATUS PAGE EVENTS
+ */
+export const statusSubmit = () => {
+    return step(
+        "HEALTH_STATUS",
+        Interaction.CLICK,
+        "User elected to submit their health status changes."
+    )
+};
+
+export const statusChange = () => {
+    return step(
+        "HEALTH_STATUS",
+        Interaction.CLICK,
+        "User elected to change their health status."
+    )
+}
