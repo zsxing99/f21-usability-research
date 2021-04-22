@@ -9,12 +9,14 @@
     "@testing-library/user-event": "^12.2.2",
     "bootstrap": "^4.5.3",
     "daypilot-pro-react": "https://npm.daypilot.org/daypilot-pro-react/trial/2018.2.3297.tar.gz",
+    "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
     "react-event-calendar": "^0.3.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-tracker": "0.0.8",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

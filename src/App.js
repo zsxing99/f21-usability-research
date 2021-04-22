@@ -32,6 +32,9 @@ import {
 
 import { useState } from "react";
 
+import { TrackerProvider } from 'react-tracker'
+import configuredTracker from './tracking/configureTracker';
+
 function App() {
   const [requests, setRequests] = useState([]);
   const [volunteerLock, setVolunteerLock] = useState(false);
@@ -45,6 +48,7 @@ function App() {
         marginTop: "6vh",
       }}
     >
+      <TrackerProvider tracker={configuredTracker}>
       <Router>
         <Switch>
           <Route
@@ -134,6 +138,7 @@ function App() {
           <Route exact path="/chat" render={() => <Chat />}></Route>
         </Switch>
       </Router>
+      </TrackerProvider>
     </Container>
   );
 }
