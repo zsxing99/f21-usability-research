@@ -26,7 +26,7 @@ export default function VolunteerDashboard(props) {
       </div>
       <div className="title">Volunteer Dashboard</div>
       <div className="body">
-        <div className="volunteer-lock-message">
+        <div align="center" className="volunteer-lock-message">
           <h4>You are not eligible for volunteering.</h4>
         </div>
         <div
@@ -38,7 +38,7 @@ export default function VolunteerDashboard(props) {
           <div align="center" className="library-fontello">
             <i className="icon-clipboard body-icons volunteer-action-shadow"></i>
           </div>
-          <h2 class="volunteer-dashboard-option-text">
+          <h2 align="center" class="volunteer-dashboard-option-text">
             Availability & Health Status
           </h2>
         </div>
@@ -53,7 +53,9 @@ export default function VolunteerDashboard(props) {
           <div align="center" className="library-fontello">
             <i className="icon-basket body-icons"></i>
           </div>
-          <h2 class="volunteer-dashboard-option-text-2">Requests</h2>
+          <h2 align="center" class="volunteer-dashboard-option-text-2">
+            Requests
+          </h2>
         </div>
       </div>
     </>

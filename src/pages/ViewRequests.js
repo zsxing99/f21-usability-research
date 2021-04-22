@@ -2,6 +2,9 @@ import { useState } from "react";
 
 import { useHistory } from "react-router-dom";
 import Calendar from "../calendar/calendar2";
+import Tabs from "../components/Tabs";
+
+import "../styles/App.css";
 
 export let requestFor = "";
 
@@ -33,7 +36,7 @@ export default function ViewRequests() {
         ></i>
       </div>
       <div class="title">Requests</div>
-
+      <Tabs className="tab-list" selected="requests"></Tabs>
       <div className="body">
         <h2>Requests for Today</h2>
         <div class="requests">

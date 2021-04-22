@@ -197,6 +197,10 @@ p {
   background-image: url("./orange.png");
 }
 
+.selected-tab {
+  background: #990909;
+}
+
 .quantity {
   width: 251px;
   height: 22px;
@@ -466,8 +470,11 @@ div.end {
   border: 0px solid #ffffff;
   border-radius: 50px;
   box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.479);
-  padding: 10px;
-  align-content: center;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  /* padding-right: 20px; */
+  /* padding-left: -5px; */
+  /* align-content: center; */
   background: rgba(255, 255, 255, 0.363);
 }
 
@@ -492,23 +499,23 @@ div.end {
 
 .volunteer-dashboard-option-locked {
   margin-top: 20%;
-  opacity: 50%;
-  border: 0px solid #ffffff;
+  opacity: 90%;
+  border: 2px solid #0000003b;
   border-radius: 50px;
-  box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.479);
+  /* box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.479); */
   padding: 10px;
-  align-content: center;
-  background: rgba(255, 255, 255, 0.363);
+  /* align-content: center; */
+  background: rgba(255, 255, 255, 0);
 }
 
 .volunteer-dashboard-option-text {
-  padding: 5px;
-  padding-left: 10%;
+  padding-top: 10px;
+  /* padding-left: 10%; */
 }
 
 .volunteer-dashboard-option-text-2 {
-  padding: 5px;
-  padding-left: 40%;
+  padding-top: 10px;
+  /* padding-left: 40%; */
 }
 
 .request-clickable {
@@ -695,4 +702,34 @@ a {
 
 .input-radio {
   margin-right: 20px;
+}
+
+.tab-list {
+  border-bottom: 1px solid #ccc;
+  padding-left: 0;
+}
+
+.tab-list-item {
+  display: inline-block;
+  list-style: none;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+}
+
+.tab-list-item:hover {
+  display: inline-block;
+  list-style: none;
+  cursor: pointer;
+  background-color: #72798b4b;
+  margin-bottom: -1px;
+  padding: 0.5rem 0.75rem;
+}
+
+.tab-list-active {
+  background-color: rgba(255, 255, 255, 0.164);
+  /* border: solid rgba(10, 10, 10, 0.205); */
+  border-width: 2px 2px 0 2px;
+  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.541);
+  /* border-radius: 8px; */
+  font-weight: bold;
 }

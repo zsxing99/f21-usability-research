@@ -9,6 +9,7 @@ import AvailabilityHealthStatus from "./pages/Availablity-HealthStatus";
 import LockedVolunteer from "./pages/Locked-Volunteer";
 import InfoPage from "./pages/Info";
 import VolunteerDashboard from "./pages/VolunteerDashboard";
+import HealthStatus from "./pages/HealthStatus";
 import EditItems from "./pages/EditItems";
 
 import Login from "./pages/Login";
@@ -20,6 +21,7 @@ import ViewRequests2 from "./pages/ViewRequests2";
 import DeliveryRequest2 from "./pages/DeliveryRequest2";
 import DeliveryRequest from "./pages/DeliveryRequest";
 import Chat from "./pages/Chat";
+import Tabs from "./components/Tabs";
 
 import Subscription from "./pages/Subscription";
 
@@ -124,6 +126,11 @@ function App() {
             render={() => (
               <AvailabilityHealthStatus setVolunteerLock={setVolunteerLock} />
             )}
+          ></Route>
+          <Route
+            exact
+            path="/volunteer-health"
+            render={() => <HealthStatus setVolunteerLock={setVolunteerLock} />}
           ></Route>
           <Route
             exact

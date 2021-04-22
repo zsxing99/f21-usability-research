@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import Tabs from "../components/Tabs";
 
 export default function Info() {
   const history = useHistory();
@@ -17,6 +18,7 @@ export default function Info() {
       <div className="title">
         <h1> Help</h1>
       </div>
+      <Tabs className="tab-list" selected="help"></Tabs>
     </>
   );
 }
