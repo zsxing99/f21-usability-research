@@ -2,31 +2,23 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../styles/App.css";
 import Tabs from "../components/Tabs";
+import TitleBar from "../components/TitleBar";
 
 export default function VolunteerDashboard(props) {
   const history = useHistory();
   return (
     <>
-      <div
+      {/* <div
         class="logout"
         onClick={() => {
           history.push("/login");
         }}
       >
         Logout
-        {/* <div className="library-fontello">
-          <i className="icon-torso"></i>
-          <a
-            onClick={() => {
-              history.push("/login");
-            }}
-          >
-            Logout
-          </a>
-        </div> */}
-      </div>
-      <div className="title">Volunteer Dashboard</div>
-      <Tabs className="tab-list" selected="home"></Tabs>
+      </div> */}
+      {/* <div className="title">Volunteer Dashboard</div> */}
+      <TitleBar title="Dashboard" selected="home" isHome="true" />
+      {/* <Tabs className="tab-list" selected="home"></Tabs> */}
       <div className="body">
         {props.lock ? (
           <div> You are locked out!</div>
@@ -41,7 +33,7 @@ export default function VolunteerDashboard(props) {
               <i className="icon-clipboard body-icons volunteer-action-shadow"></i>
             </div>
             <h2 align="center" class="volunteer-dashboard-option-text">
-              Health Info & Availability
+              Volunteer
             </h2>
           </div>
         )}

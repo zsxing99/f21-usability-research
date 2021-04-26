@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import Calendar from "../calendar/calendar2";
 import Tabs from "../components/Tabs";
+import TitleBar from "../components/TitleBar";
 
 import "../styles/App.css";
 
@@ -27,16 +28,17 @@ export default function ViewRequests() {
 
   return (
     <>
-      <div className="library-fontello">
+      {/* <div className="library-fontello">
         <i
           className="icon-left-open back"
           onClick={() => {
             history.push("/volunteer-dashboard");
           }}
         ></i>
-      </div>
-      <div class="title">Requests</div>
-      <Tabs className="tab-list" selected="requests"></Tabs>
+      </div> */}
+      {/* <div class="title">Requests</div> */}
+      <TitleBar title="Requests" selected="requests"></TitleBar>
+      {/* <Tabs className="tab-list" selected="requests"></Tabs> */}
       <div className="body">
         <h2>Requests for Today</h2>
         <div class="requests">

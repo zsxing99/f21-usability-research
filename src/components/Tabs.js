@@ -10,7 +10,7 @@ export default function Tabs(props) {
     avaClass = "tab-list-item",
     helpClass = "tab-list-item",
     reqClass = "tab-list-item";
-  console.log(props.selected);
+  console.log(props);
   // const homeClass =
   //   "tab-list-item " + (props.selected === "home") ? "tab-list-active" : "";
   // const avaClass =
@@ -21,8 +21,6 @@ export default function Tabs(props) {
   //   "tab-list-item " + (props.selected === "requests") ? "tab-list-active" : "";
   // const helpClass =
   //   "tab-list-item " + (props.selected === "help") ? "tab-list-active" : "";
-
-  console.log(history);
 
   switch (props.selected) {
     case "home":
@@ -70,7 +68,7 @@ export default function Tabs(props) {
           Home
         </div>
         <div className={avaClass} onClick={goAvailability}>
-          Volunteer Info
+          Volunteer
         </div>
         <div
           className={reqClass}

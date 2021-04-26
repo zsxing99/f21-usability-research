@@ -1,12 +1,8 @@
 body {
   background: #d5d5d8;
+  /* border: solid #000000; */
   background-image: url("../logo_light.png");
   font-family: "Lato";
-}
-
-.container {
-  /* background: #d5d5d8; */
-  /* background-image: url("../logo_light.png"); */
 }
 
 button {
@@ -45,6 +41,32 @@ h1 {
   font-weight: bold;
   font-size: 30px;
   line-height: 30px;
+}
+
+.title-text {
+  /* position: absolute; */
+  /* height: 30px; */
+  height: 35px;
+  font-weight: bold;
+  font-size: 30px;
+  line-height: 30px;
+  /* vertical-align: middle; */
+  /* align-items: center; */
+}
+
+.title-bar {
+  /* position: fixed; */
+  /* padding: 20px; */
+  margin-top: -35px;
+  height: fit-content;
+  /* margin-left: -15px; */
+  /* width: 90%; */
+  max-width: 550px;
+  background-color: #aa767c9f;
+  box-shadow: 3px 3px 3px gray;
+  border-radius: 5px;
+  padding-top: 5px;
+  /* padding-left: 2px; */
 }
 
 h2 {
@@ -86,8 +108,13 @@ p {
 }
 
 .back {
+  /* display: inline; */
+  /* height: 30px; */
   font-size: 30px;
   float: left;
+  margin-top: -5px;
+  padding-left: 5px;
+  /* vertical-align: middle; */
 }
 
 .logout {
@@ -130,7 +157,10 @@ p {
 
   /* background: #f6f6f6; */
   /* border-radius: 8px; */
-  margin-top: 20px;
+  /* border: solid black; */
+  /* box-shadow: #14203e; */
+  /* box-shadow: 3px 3px 3px 3px gray; */
+  margin-top: 30px;
 }
 .calendar {
   /* display: flex; */
@@ -468,7 +498,7 @@ div.end {
 .volunteer-dashboard-option {
   margin-top: 20%;
   border: 0px solid #ffffff;
-  border-radius: 50px;
+  border-radius: 10px;
   box-shadow: 0px 8px 8px rgba(0, 0, 0, 0.479);
   padding-top: 10px;
   padding-bottom: 10px;
@@ -705,7 +735,9 @@ a {
 }
 
 .tab-list {
-  border-bottom: 1px solid #ccc;
+  /* border-top: 1px rgba(7, 0, 0, 0.226); */
+  box-shadow: 0px -3px 3px rgba(255, 255, 255, 0.308);
+  /* background-color: #b18e9270; */
   padding-left: 0;
 }
 
@@ -720,16 +752,17 @@ a {
   display: inline-block;
   list-style: none;
   cursor: pointer;
-  background-color: #72798b4b;
+  background-color: #72798b11;
   margin-bottom: -1px;
   padding: 0.5rem 0.75rem;
 }
 
 .tab-list-active {
-  background-color: rgba(255, 255, 255, 0.164);
-  /* border: solid rgba(10, 10, 10, 0.205); */
-  border-width: 2px 2px 0 2px;
-  box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.541);
+  background-color: rgba(255, 255, 255, 0.198);
+  border: solid #14203eab;
+  /* border-bt: #14203e; */
+  border-width: 0 0 3px 0;
+  /* box-shadow: 0px -4px 4px rgba(0, 0, 0, 0.541); */
   /* border-radius: 8px; */
   font-weight: bold;
 }
