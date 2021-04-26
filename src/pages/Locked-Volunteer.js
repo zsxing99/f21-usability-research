@@ -6,56 +6,23 @@ export default function VolunteerDashboard(props) {
   const lock = true;
   return (
     <>
-      <div
-        class="logout"
-        onClick={() => {
-          history.push("/login");
-        }}
-      >
-        Logout
-        {/* <div className="library-fontello">
-          <i className="icon-torso"></i>
-          <a
+      <div className="title-bar">
+        <div className="title">Volunteer Profile Locked</div>
+      </div>
+      <div align="center" className="body">
+        <div align="center" className="volunteer-lock-message">
+          Because of your current health status you are not eligible for
+          volunteering. Please check back in after 14 days.
+        </div>
+        <div className="return-home-button">
+          <button
+            align="center"
             onClick={() => {
-              history.push("/login");
+              history.push("/");
             }}
           >
-            Logout
-          </a>
-        </div> */}
-      </div>
-      <div className="title">Volunteer Dashboard</div>
-      <div className="body">
-        <div align="center" className="volunteer-lock-message">
-          <h4>You are not eligible for volunteering.</h4>
-        </div>
-        <div
-          class="volunteer-dashboard-option-locked"
-          //   onClick={() => {
-          //     history.push("/edit-volunteer-data");
-          //   }}
-        >
-          <div align="center" className="library-fontello">
-            <i className="icon-clipboard body-icons volunteer-action-shadow"></i>
-          </div>
-          <h2 align="center" class="volunteer-dashboard-option-text">
-            Availability & Health Status
-          </h2>
-        </div>
-        <br />
-        <br />
-        <div
-          class="volunteer-dashboard-option-locked"
-          //   onClick={() => {
-          //     history.push("/view-volunteer-requests");
-          //   }}
-        >
-          <div align="center" className="library-fontello">
-            <i className="icon-basket body-icons"></i>
-          </div>
-          <h2 align="center" class="volunteer-dashboard-option-text-2">
-            Requests
-          </h2>
+            Return Home
+          </button>
         </div>
       </div>
     </>

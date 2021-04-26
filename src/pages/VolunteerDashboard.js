@@ -8,17 +8,7 @@ export default function VolunteerDashboard(props) {
   const history = useHistory();
   return (
     <>
-      {/* <div
-        class="logout"
-        onClick={() => {
-          history.push("/login");
-        }}
-      >
-        Logout
-      </div> */}
-      {/* <div className="title">Volunteer Dashboard</div> */}
       <TitleBar title="Dashboard" selected="home" isHome="true" />
-      {/* <Tabs className="tab-list" selected="home"></Tabs> */}
       <div className="body">
         {props.lock ? (
           <div> You are locked out!</div>
@@ -26,7 +16,7 @@ export default function VolunteerDashboard(props) {
           <div
             class="volunteer-dashboard-option"
             onClick={() => {
-              history.push("/edit-volunteer-data");
+              history.push("/volunteer-health");
             }}
           >
             <div align="center" className="library-fontello">
@@ -37,7 +27,6 @@ export default function VolunteerDashboard(props) {
             </h2>
           </div>
         )}
-        <br />
         <br />
         <div
           class="volunteer-dashboard-option"
