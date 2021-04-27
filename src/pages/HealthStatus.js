@@ -17,7 +17,18 @@ export default function HealthStatus(props) {
   const [bodyaches, setBodyaches] = useState(false);
 
   function handleSubmit(event) {
+    // if nothing is checked
     if (
+      !event.target.elements.breathe.checked &&
+      !event.target.elements.fever.checked &&
+      !event.target.elements.cold.checked &&
+      !event.target.elements.sense.checked &&
+      !event.target.elements.fatigue.checked &&
+      !event.target.elements.bodyaches.checked &&
+      !event.target.elements.nota.checked
+    ) {
+      alert("Please check atleast one option");
+    } else if (
       event.target.elements.breathe.checked ||
       event.target.elements.fever.checked ||
       event.target.elements.cold.checked ||
@@ -25,11 +36,15 @@ export default function HealthStatus(props) {
       event.target.elements.fatigue.checked ||
       event.target.elements.bodyaches.checked
     ) {
-      alert(
-        "Covid Symptoms observed. You are not eligible for volunteering. Account Disable for 14 days"
-      );
-      history.push("/locked", { lock: true });
-      disableVolunteerFlag = true;
+      if (event.target.elements.nota.checked) {
+        alert("Invalid selection");
+      } else {
+        alert(
+          "Covid Symptoms observed. You are not eligible for volunteering. Account Disable for 14 days"
+        );
+        history.push("/locked", { lock: true });
+        disableVolunteerFlag = true;
+      }
     } else {
       history.push("/edit-volunteer-data");
     }
@@ -50,35 +65,34 @@ export default function HealthStatus(props) {
     // const target = event.target;
     // console.log(target);
     // const value = target.type === "checkbox" ? target.checked : target.value;
-    console.log(event);
-    const targetId = event.target.id;
-    switch (targetId) {
-      case "nota":
-        setNota(nota === true ? false : true);
-        break;
-      case "breathe":
-        setBreathe(breathe === true ? false : true);
-        break;
-      case "sense":
-        setSense(sense === true ? false : true);
-        break;
-      case "fatigue":
-        setFatigue(fatigue === true ? false : true);
-        break;
-      case "cold":
-        setCold(cold === true ? false : true);
-        break;
-      case "fever":
-        setFever(fever === true ? false : true);
-        break;
-      case "bodyaches":
-        setBodyaches(bodyaches === true ? false : true);
-        break;
-    }
-
-    if (bodyaches || fever || cold || sense || fatigue || breathe || nota) {
-      setDisableSubmit(false);
-    }
+    // console.log(event.target.id);
+    // const targetId = event.target.id;
+    // switch (targetId) {
+    //   case "nota":
+    //     setNota(nota === true ? false : true);
+    //     break;
+    //   case "breathe":
+    //     setBreathe(breathe === true ? false : true);
+    //     break;
+    //   case "sense":
+    //     setSense(sense === true ? false : true);
+    //     break;
+    //   case "fatigue":
+    //     setFatigue(fatigue === true ? false : true);
+    //     break;
+    //   case "cold":
+    //     setCold(cold === true ? false : true);
+    //     break;
+    //   case "fever":
+    //     setFever(fever === true ? false : true);
+    //     break;
+    //   case "bodyaches":
+    //     setBodyaches(bodyaches === true ? false : true);
+    //     break;
+    // }
+    // if (bodyaches || fever || cold || sense || fatigue || breathe || nota) {
+    //   setDisableSubmit(false);
+    // }
   }
 
   return (
@@ -111,7 +125,8 @@ export default function HealthStatus(props) {
                 type="checkbox"
                 id="breathe"
                 name="breathe"
-                onChange={handleCheckbox}
+                disabled={nota}
+                // onChange={handleCheckbox}
                 className="input-checkbox"
               />
               <label htmlFor="breathe">Breathing Issues</label>
@@ -121,7 +136,7 @@ export default function HealthStatus(props) {
                 type="checkbox"
                 id="fever"
                 name="fever"
-                onChange={handleCheckbox}
+                // onChange={handleCheckbox}
                 className="input-checkbox"
               />
               <label htmlFor="fever">Fever</label>
@@ -131,7 +146,7 @@ export default function HealthStatus(props) {
                 type="checkbox"
                 id="cold"
                 name="cold"
-                onChange={handleCheckbox}
+                // onChange={handleCheckbox}
                 className="input-checkbox"
               />
               <label htmlFor="cold">Cold/Cough</label>
@@ -141,7 +156,7 @@ export default function HealthStatus(props) {
                 type="checkbox"
                 id="sense"
                 name="sense"
-                onChange={handleCheckbox}
+                // onChange={handleCheckbox}
                 className="input-checkbox"
               />
               <label htmlFor="sense">Lost sense of smell/taste</label>
@@ -151,7 +166,7 @@ export default function HealthStatus(props) {
                 type="checkbox"
                 id="fatigue"
                 name="fatigue"
-                onChange={handleCheckbox}
+                // onChange={handleCheckbox}
                 className="input-checkbox"
               />
               <label htmlFor="fatigue">Fatigue</label>
@@ -161,7 +176,7 @@ export default function HealthStatus(props) {
                 type="checkbox"
                 id="bodyaches"
                 name="bodyaches"
-                onChange={handleCheckbox}
+                // onChange={handleCheckbox}
                 className="input-checkbox"
               />
               <label htmlFor="bodyaches">Body Aches</label>
@@ -172,8 +187,8 @@ export default function HealthStatus(props) {
                 id="nota"
                 name="nota"
                 className="input-checkbox"
-                onChange={handleCheckbox}
-                checked={nota}
+                // onChange={handleCheckbox}
+                // checked={nota ? true : false}
               />
               <label htmlFor="nota">None of the Above</label>
             </div>
@@ -185,7 +200,6 @@ export default function HealthStatus(props) {
               type="submit"
               className="btn-primary btn"
               value="Next"
-              disabled={disableSubmit}
             ></input>
           </div>
         </form>
