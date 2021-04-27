@@ -1,7 +1,8 @@
-import { useState } from 'react';
-import { Form, Col, Button } from 'react-bootstrap';
-import Item from './Item';
-import { useHistory } from 'react-router-dom';
+import { useState } from "react";
+import { Form, Col, Button } from "react-bootstrap";
+import Item from "./Item";
+import { useHistory } from "react-router-dom";
+import TitleBar from "../components/TitleBar";
 // import defItemList from "./EditItems";
 
 export let updatedItems = [];
@@ -31,7 +32,7 @@ const EditItem = () => {
       console.log(newItems);
       updatedItems = newItems;
       history.push({
-        pathname: '/edit-item-list',
+        pathname: "/edit-item-list",
         state: { itemList: newItems },
       });
     }
@@ -39,7 +40,7 @@ const EditItem = () => {
 
   function handleCancel(e) {
     history.push({
-      pathname: '/edit-item-list',
+      pathname: "/edit-item-list",
     });
   }
 
@@ -53,7 +54,7 @@ const EditItem = () => {
     console.log(newItems);
     updatedItems = newItems;
     history.push({
-      pathname: '/edit-item-list',
+      pathname: "/edit-item-list",
       state: { itemList: newItems },
     });
   }
@@ -63,34 +64,36 @@ const EditItem = () => {
   }
   return (
     <>
-      <div class="library-fontello">
+      {/* <div class="library-fontello">
         <i class="icon-left-open back" onClick={handleCancel}></i>
       </div>
-      <div class="title">Edit Items</div>
-      <div class="body">
-        <Form>
-          <Form.Row>
-            <Col xs="7">
-              <Form.Control
-                type="text"
-                placeholder="Item Name"
-                value={itemName}
-                onChange={(e) => setItemName(e.target.value)}
-                required
-              ></Form.Control>
-            </Col>
-            <Col xs="3">
-              <Form.Control
-                type="text"
-                placeholder="Qty"
-                value={itemQty}
-                onChange={(e) => setItemQty(e.target.value)}
-                required
-              ></Form.Control>
-            </Col>
-            <Col xs="2"></Col>
-          </Form.Row>
-          <Form.Row>
+      <div class="title">Edit Items</div> */}
+      <TitleBar selected="requests" title="Edit Item" />
+      <div align="center" class="body">
+        <div className="edit-item-form">
+          <Form>
+            <Form.Row>
+              <Col xs="7">
+                <Form.Control
+                  type="text"
+                  placeholder="Item Name"
+                  value={itemName}
+                  onChange={(e) => setItemName(e.target.value)}
+                  required
+                ></Form.Control>
+              </Col>
+              <Col xs="3">
+                <Form.Control
+                  type="text"
+                  placeholder="Qty"
+                  value={itemQty}
+                  onChange={(e) => setItemQty(e.target.value)}
+                  required
+                ></Form.Control>
+              </Col>
+              <Col xs="2"></Col>
+            </Form.Row>
+            {/* <Form.Row align="center">
             <div class="edit-item-button">
               <button onClick={handleSaveItem}>Save</button>
             </div>
@@ -100,8 +103,20 @@ const EditItem = () => {
             <div class="edit-item-button">
               <button onClick={handleCancel}>Cancel</button>
             </div>
-          </Form.Row>
-        </Form>
+          </Form.Row> */}
+          </Form>
+        </div>
+        <div align="center" className="edit-item-actions">
+          <div className="edit-item-button">
+            <button onClick={handleSaveItem}>Save</button>
+          </div>
+          <div className="edit-item-button">
+            <button onClick={handleDeleteItem}>Delete</button>
+          </div>
+          <div className="edit-item-button">
+            <button onClick={handleCancel}>Cancel</button>
+          </div>
+        </div>
       </div>
     </>
   );

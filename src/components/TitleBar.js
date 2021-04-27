@@ -10,6 +10,7 @@ export default function TitleBar(props) {
   const title = props.title;
   const selected = props.selected;
   const isHome = props.isHome ? true : false;
+  const backPage = props.backPage ? props.backPage : null;
   return (
     <div className="title-bar">
       {!isHome ? (
@@ -18,7 +19,8 @@ export default function TitleBar(props) {
             <i
               className="icon-left-open"
               onClick={() => {
-                history.goBack();
+                if (backPage === null) history.goBack();
+                else history.push(backPage);
               }}
             ></i>
           </div>
@@ -26,19 +28,10 @@ export default function TitleBar(props) {
       ) : (
         <></>
       )}
-      {/* <div className="back">
-        <div className="library-fontello">
-          <i
-            className="icon-left-open"
-            onClick={() => {
-              history.goBack();
-            }}
-          ></i>
-        </div>
-      </div> */}
       <div className="title-text" align="center">
         {title}
       </div>
+
       <Tabs className="tab-list" selected={selected}></Tabs>
     </div>
   );
