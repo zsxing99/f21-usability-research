@@ -35,6 +35,8 @@ const EditItem = () => {
         pathname: "/edit-item-list",
         state: { itemList: newItems },
       });
+    } else {
+      alert("Please enter information in all the fields");
     }
   }
 

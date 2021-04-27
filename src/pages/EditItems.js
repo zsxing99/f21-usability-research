@@ -20,7 +20,11 @@ export default function EditItems() {
     console.log(itemList);
     e.preventDefault();
     console.log(e);
-    if (itemName && itemQty) setItemList([...itemList, { itemName, itemQty }]);
+    if (itemName && itemQty) {
+      setItemList([...itemList, { itemName, itemQty }]);
+      setItemName("");
+      setItemQty("");
+    } else alert("Please enter information in all the fields");
   }
 
   return (
