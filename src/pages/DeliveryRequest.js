@@ -10,7 +10,7 @@ import {
   requestItemClick,
 } from "../tracking/events/events";
 
-export default function DeliveryRequest(props) {
+function DeliveryRequest(props) {
   const history = useHistory();
   const itemList = [
     { itemName: "Organic Milk", itemQty: 1 },
