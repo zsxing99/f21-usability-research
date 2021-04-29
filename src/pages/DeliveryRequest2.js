@@ -2,6 +2,7 @@ import Item from "./Item";
 import { useHistory } from "react-router-dom";
 import { editedItems } from "./EditItems";
 import { requestFor } from "./ViewRequests";
+import TitleBar from "../components/TitleBar";
 
 import { withTracking } from 'react-tracker';
 import { 
@@ -69,7 +70,7 @@ function DeliveryRequest2(props) {
 
   return (
     <>
-      <div className="library-fontello">
+      {/* <div className="library-fontello">
         <i
           className="icon-left-open back"
           onClick={() => {
@@ -79,7 +80,12 @@ function DeliveryRequest2(props) {
       </div>
       <div className="title">
         <h1> {requestFor}'s Request</h1>
-      </div>
+      </div> */}
+      <TitleBar
+        selected="requests"
+        title={requestFor + "'s Request"}
+        backPage="/view-volunteer-requests"
+      />
       {/* <p style={{ textAlign: 'center' }}>8 Dec 2020 6 PM</p> */}
       <div className="body">
         {initialItems.map((item) => (

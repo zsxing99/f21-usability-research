@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Form, Col, Button } from 'react-bootstrap';
-import Item from './Item';
-import { useHistory } from 'react-router-dom';
-import { updatedItems } from './EditItem';
-import { initialItems } from './DeliveryRequest2';
+import { useState } from "react";
+import { Form, Col, Button } from "react-bootstrap";
+import Item from "./Item";
+import { useHistory } from "react-router-dom";
+import { updatedItems } from "./EditItem";
+import { initialItems } from "./DeliveryRequest2";
+import TitleBar from "../components/TitleBar";
 
 export let editedItems = [];
 
@@ -12,19 +13,23 @@ export default function EditItems() {
   let generalList = updatedItems.length == 0 ? initialItems : updatedItems;
   const [itemList, setItemList] = useState(generalList);
 
-  const [itemName, setItemName] = useState('');
+  const [itemName, setItemName] = useState("");
   const [itemQty, setItemQty] = useState();
 
   function handleAddItem(e) {
     console.log(itemList);
     e.preventDefault();
     console.log(e);
-    if (itemName && itemQty) setItemList([...itemList, { itemName, itemQty }]);
+    if (itemName && itemQty) {
+      setItemList([...itemList, { itemName, itemQty }]);
+      setItemName("");
+      setItemQty("");
+    } else alert("Please enter information in all the fields");
   }
 
   return (
     <>
-      <div class="library-fontello">
+      {/* <div class="library-fontello">
         <i
           class="icon-left-open back"
           onClick={() => {
@@ -33,7 +38,12 @@ export default function EditItems() {
           }}
         ></i>
       </div>
-      <div class="title">Edit Items</div>
+      <div class="title">Edit Items</div> */}
+      <TitleBar
+        selected="requests"
+        title={"Edit Items"}
+        backPage="/delivery-request-active"
+      />
       <div class="body">
         <Form>
           <Form.Row>
@@ -66,7 +76,7 @@ export default function EditItems() {
           <div
             onClick={() => {
               history.push({
-                pathname: '/edit-item-list/item',
+                pathname: "/edit-item-list/item",
                 state: { item, itemList },
               });
             }}

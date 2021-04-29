@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import "../styles/App.css";
 import Tabs from "../components/Tabs";
+import TitleBar from "../components/TitleBar";
 
 import { withTracking } from 'react-tracker';
 import {
@@ -12,26 +13,7 @@ function VolunteerDashboard(props) {
   const history = useHistory();
   return (
     <>
-      <div
-        class="logout"
-        onClick={() => {
-          history.push("/login");
-        }}
-      >
-        Logout
-        {/* <div className="library-fontello">
-          <i className="icon-torso"></i>
-          <a
-            onClick={() => {
-              history.push("/login");
-            }}
-          >
-            Logout
-          </a>
-        </div> */}
-      </div>
-      <div className="title">Volunteer Dashboard</div>
-      <Tabs className="tab-list" selected="home"></Tabs>
+      <TitleBar title="Dashboard" selected="home" isHome="true" />
       <div className="body">
         {props.lock ? (
           <div> You are locked out!</div>
@@ -39,8 +21,7 @@ function VolunteerDashboard(props) {
           <div
             class="volunteer-dashboard-option"
             onClick={() => {
-              history.push("/edit-volunteer-data");
-
+              history.push("/volunteer-health");
               props.trackNavigation("AVAILABILITY_HEALTH_STATUS");
             }}
           >
@@ -48,11 +29,10 @@ function VolunteerDashboard(props) {
               <i className="icon-clipboard body-icons volunteer-action-shadow"></i>
             </div>
             <h2 align="center" class="volunteer-dashboard-option-text">
-              Health Info & Availability
+              Volunteer
             </h2>
           </div>
         )}
-        <br />
         <br />
         <div
           class="volunteer-dashboard-option"

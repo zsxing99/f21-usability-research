@@ -1,6 +1,7 @@
 import Item from './Item';
 import { useHistory } from 'react-router-dom';
 import { requestFor } from './ViewRequests';
+import TitleBar from "../components/TitleBar";
 
 import { withTracking } from 'react-tracker';
 import { 
@@ -9,16 +10,16 @@ import {
   requestItemClick,
 } from "../tracking/events/events";
 
-function DeliveryRequest(props) {
+export default function DeliveryRequest(props) {
   const history = useHistory();
   const itemList = [
-    { itemName: 'Organic Milk', itemQty: 1 },
-    { itemName: 'Yogurt', itemQty: 1 },
+    { itemName: "Organic Milk", itemQty: 1 },
+    { itemName: "Yogurt", itemQty: 1 },
   ];
 
   const sentMsg = [
     requestFor +
-      ',I am about to get you your groceries for this week, you specified you need: Organic Milk - 1 gallon Yoghurt - 1 Do you want anything changed?',
+      ",I am about to get you your groceries for this week, you specified you need: Organic Milk - 1 gallon Yoghurt - 1 Do you want anything changed?",
   ];
 
   const chat = { title: "Mary's Request", sent: sentMsg, received: [] };
@@ -32,17 +33,22 @@ function DeliveryRequest(props) {
 
   return (
     <>
-      <div className="library-fontello">
+      {/* <div className="library-fontello">
         <i
           className="icon-left-open back"
           onClick={() => {
-            history.push('/view-volunteer-requests');
+            history.push("/view-volunteer-requests");
           }}
         ></i>
-      </div>
-      <div className="title">
+      </div> */}
+      <TitleBar
+        selected="requests"
+        title={requestFor + "'s Request"}
+        backPage="/view-volunteer-requests"
+      />
+      {/* <div className="title">
         <h1> {requestFor}'s Request</h1>
-      </div>
+      </div> */}
       {/* <p style={{ textAlign: 'center' }}>10 Dec 2020 6 PM</p> */}
       <div className="body">
         {itemList.map((item) => (

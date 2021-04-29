@@ -1,5 +1,6 @@
 import Calendar from "../calendar/Calendar";
 import Tabs from "../components/Tabs";
+import TitleBar from "../components/TitleBar";
 import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
@@ -22,7 +23,7 @@ function AvailablityHealthStatus(props) {
 
   return (
     <>
-      <div className="back">
+      {/* <div className="back">
         <div className="library-fontello">
           <i
             className="icon-left-open"
@@ -31,11 +32,12 @@ function AvailablityHealthStatus(props) {
             }}
           ></i>
         </div>
-      </div>
-      <div className="title">
+      </div> */}
+      {/* <div className="title">
         <h1>Availability </h1>
-      </div>
-      <Tabs className="tab-list" selected="availability"></Tabs>
+      </div> */}
+      <TitleBar title="Volunteer" selected="availability" />
+      {/* <Tabs className="tab-list" selected="availability"></Tabs> */}
 
       <div className="body">
         <form onSubmit={handleSubmit}>
