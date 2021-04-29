@@ -12,11 +12,12 @@ export const pageView = pageName => ({
     }
 });
 
-export const step = (pageName, interactionType, action) => ({
+export const step = (pageName, interactionType, actionType, action) => ({
     type: "STEP",
     data: {
         pageName,
         interactionType,
+        actionType,
         action,
         timestamp: moment().format()
     }

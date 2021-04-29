@@ -22,7 +22,7 @@ export default function Tabs(props) {
   // const helpClass =
   //   "tab-list-item " + (props.selected === "help") ? "tab-list-active" : "";
 
-  console.log(history);
+  // console.log(history);
 
   switch (props.selected) {
     case "home":

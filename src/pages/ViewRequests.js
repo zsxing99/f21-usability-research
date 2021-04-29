@@ -6,9 +6,12 @@ import Tabs from "../components/Tabs";
 
 import "../styles/App.css";
 
+import { withTracking } from 'react-tracker';
+import { navigateTo } from "../tracking/events/events";
+
 export let requestFor = "";
 
-export default function ViewRequests() {
+function ViewRequests(props) {
   const history = useHistory();
   const [r1status, setR1Status] = useState("Received");
   const [r2status, setR2Status] = useState("Received");
@@ -46,6 +49,7 @@ export default function ViewRequests() {
               handleListItem("request2");
               requestFor = "Mary";
               history.push("/delivery-request-active");
+              props.trackNavigation("ON_DEMAND_REQUEST");
             }}
           >
             <div class="picture mary">
@@ -66,6 +70,7 @@ export default function ViewRequests() {
               requestFor = "Mary";
               handleListItem("request1");
               history.push("/delivery-request");
+              props.trackNavigation("SUBSCRIPTION_REQUEST");
             }}
           >
             <div class="picture mary"></div>
@@ -90,3 +95,14 @@ export default function ViewRequests() {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackNavigation: (pageName) =>
+      trackEvent(navigateTo(pageName)),
+  }
+}
+
+const ViewRequestsWithTracking = withTracking(mapTrackingToProps)(ViewRequests);
+
+export default ViewRequestsWithTracking;
