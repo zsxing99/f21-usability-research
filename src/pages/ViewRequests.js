@@ -103,7 +103,7 @@ const mapTrackingToProps = trackEvent => {
     trackNavigation: (pageName) =>
       trackEvent(navigateTo(pageName)),
   }
-}
+};
 
 const ViewRequestsWithTracking = withTracking(mapTrackingToProps)(ViewRequests);
 

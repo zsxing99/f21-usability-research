@@ -4,9 +4,7 @@
 const Action = Object.freeze({
     NONE:       "none",
     SUBMIT:     "submit",
-    CANCEL:     "cancel",  // "cancel"
-    // PAUSE:      "pause", // cannot really log
-    // WAIT:       "wait",  // cannot really log (remove)
+    CANCEL:     "cancel",
     NAVIGATION: "navigation",
     BACK:       "back",  // gestures + browser back + app back
 });

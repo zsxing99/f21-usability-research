@@ -10,9 +10,18 @@ export const navigateTo = (pageName) => {
         pageName,
         Interaction.CLICK,
         Action.NAVIGATION,
-        `User elected to navigate to ${pageName} page`
+        `User elected to navigate to ${pageName} page.`
     )
 };
+
+export const navigateBack = () => {
+    return step(
+        null,
+        Interaction.CLICK,
+        Interaction.BACK,
+        `User elected to navigate back to the previous page.`
+    )
+}
 
 /**
  * AVAILABILITY PAGE EVENTS

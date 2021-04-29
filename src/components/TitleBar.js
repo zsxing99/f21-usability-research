@@ -2,9 +2,13 @@ import { useHistory } from "react-router";
 // import {React} from react;
 import React from "react";
 import Tabs from "../components/Tabs";
+
+import { withTracking } from 'react-tracker';
+import { navigateBack } from '../tracking/events/events';
+
 import "../styles/App.css";
 
-export default function TitleBar(props) {
+function TitleBar(props) {
   const history = useHistory();
 
   const title = props.title;
@@ -21,6 +25,7 @@ export default function TitleBar(props) {
               onClick={() => {
                 if (backPage === null) history.goBack();
                 else history.push(backPage);
+                props.trackBackNavigation();
               }}
             ></i>
           </div>
@@ -36,3 +41,14 @@ export default function TitleBar(props) {
     </div>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackBackNavigation: () =>
+      trackEvent(navigateBack()),
+  }
+};
+
+const TitleBarWithTracking = withTracking(mapTrackingToProps)(TitleBar);
+
+export default TitleBarWithTracking;

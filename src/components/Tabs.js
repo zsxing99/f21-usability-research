@@ -3,7 +3,10 @@ import { useHistory } from "react-router";
 import React from "react";
 import "../styles/App.css";
 
-export default function Tabs(props) {
+import { withTracking } from 'react-tracker';
+import { navigateTo } from '../tracking/events/events';
+
+function Tabs(props) {
   const history = useHistory();
 
   let homeClass = "tab-list-item",
@@ -45,18 +48,22 @@ export default function Tabs(props) {
 
   function goHome(e) {
     if (props.selected !== "home") history.push("/");
+    props.trackNavigation("HOME");
   }
 
   function goRequests(e) {
     if (props.selected !== "requests") history.push("/view-volunteer-requests");
+    props.trackNavigation("REQUESTS");
   }
 
   function goAvailability(e) {
     if (props.selected !== "availability") history.push("/volunteer-health");
+    props.trackNavigation("AVAILABILITY");
   }
 
   function goHelp(e) {
     if (props.selected !== "help") history.push("/info");
+    props.trackNavigation("HELP");
   }
 
   return (
@@ -83,3 +90,14 @@ export default function Tabs(props) {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackNavigation: (pageName) =>
+      trackEvent(navigateTo(pageName)),
+  }
+}
+
+const TabsWithTracking = withTracking(mapTrackingToProps)(Tabs);
+
+export default TabsWithTracking;
