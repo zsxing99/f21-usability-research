@@ -27,7 +27,7 @@ function DeliveryRequest(props) {
     event.preventDefault();
   }
 
-  const onItemClick = () => {
+  function onItemClick() {
     props.trackRequestItemClick();
   }
 
@@ -53,7 +53,7 @@ function DeliveryRequest(props) {
       <div className="body">
         {itemList.map((item) => (
           <div>
-            <Item item={item} onClick={onItemClick()}></Item>
+            <Item item={item} onClick={onItemClick}></Item>
           </div>
         ))}
         {/* <div class="table">

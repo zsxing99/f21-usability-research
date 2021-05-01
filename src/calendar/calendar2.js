@@ -6,6 +6,11 @@ import {
 } from "daypilot-pro-react";
 import "./CalendarStyles.css";
 
+import { withTracking } from 'react-tracker';
+import {
+  calendarClick
+} from '../tracking/events/events'
+
 const styles = {
   wrap: {
     display: "flex",
@@ -63,7 +68,7 @@ class Calendar extends Component {
     var { ...config } = this.state;
     return (
       <div style={styles.wrap}>
-        <div style={styles.main}>
+        <div style={styles.main} onClick={this.props.trackCalendarClick}>
           <DayPilotCalendar
             {...config}
             ref={(component) => {
@@ -76,4 +81,13 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackCalendarClick: () =>
+      trackEvent(calendarClick()),
+  };
+};
+
+const CalendarWithTracking = withTracking(mapTrackingToProps)(Calendar);
+
+export default CalendarWithTracking;

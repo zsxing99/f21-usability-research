@@ -1,6 +1,11 @@
 import { useState } from "react";
+import { propTypes } from "react-bootstrap/esm/Image";
 import { useHistory } from "react-router-dom";
-export default function Chat() {
+
+import { withTracking } from 'react-tracker';
+import { navigateBack } from '../tracking/events/events';
+
+function Chat(props) {
   const history = useHistory();
   const [chatTitle, setChatTitle] = useState(history.location.state.title);
   const [receivedMsg, setReceivedMsg] = useState(
@@ -15,6 +20,7 @@ export default function Chat() {
           className="icon-left-open back"
           onClick={() => {
             history.push("/delivery-request-active");
+            props.trackBackNavigation();
           }}
         ></i>
         {/* </div> */}
@@ -40,3 +46,14 @@ export default function Chat() {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackBackNavigation: () =>
+      trackEvent(navigateBack()),
+  }
+};
+
+const ChatWithTracking = withTracking(mapTrackingToProps)(Chat);
+
+export default ChatWithTracking;

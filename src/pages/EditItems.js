@@ -6,9 +6,16 @@ import { updatedItems } from "./EditItem";
 import { initialItems } from "./DeliveryRequest2";
 import TitleBar from "../components/TitleBar";
 
+import { withTracking } from 'react-tracker';
+import {
+  navigateTo,
+  newRequestItemDetailChange,
+  newRequestItemDetailSubmit,
+} from '../tracking/events/events';
+
 export let editedItems = [];
 
-export default function EditItems() {
+function EditItems(props) {
   const history = useHistory();
   let generalList = updatedItems.length == 0 ? initialItems : updatedItems;
   const [itemList, setItemList] = useState(generalList);
@@ -25,6 +32,8 @@ export default function EditItems() {
       setItemName("");
       setItemQty("");
     } else alert("Please enter information in all the fields");
+    
+    props.trackNewRequestItemDetailSubmit();
   }
 
   return (
@@ -52,7 +61,10 @@ export default function EditItems() {
                 type="text"
                 placeholder="Item Name"
                 value={itemName}
-                onChange={(e) => setItemName(e.target.value)}
+                onChange={(e) => {
+                  setItemName(e.target.value);
+                  props.trackNewRequestItemDetailChange();
+                }}
                 required
               ></Form.Control>
             </Col>
@@ -61,7 +73,10 @@ export default function EditItems() {
                 type="text"
                 placeholder="Qty"
                 value={itemQty}
-                onChange={(e) => setItemQty(e.target.value)}
+                onChange={(e) => {
+                  setItemQty(e.target.value);
+                  props.trackNewRequestItemDetailChange();
+                }}
                 required
               ></Form.Control>
             </Col>
@@ -79,6 +94,7 @@ export default function EditItems() {
                 pathname: "/edit-item-list/item",
                 state: { item, itemList },
               });
+              props.trackNavigation("EDIT_REQUEST_ITEM_DETAILS");
             }}
           >
             <Item item={item}></Item>
@@ -88,3 +104,21 @@ export default function EditItems() {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackNavigation: (pageName) =>
+      trackEvent(navigateTo(pageName)),
+    
+    trackNewRequestItemDetailChange: () =>
+      trackEvent(newRequestItemDetailChange()),    
+
+    trackNewRequestItemDetailSubmit: () =>
+      trackEvent(newRequestItemDetailSubmit()),
+
+  }
+};
+
+const EditItemsWithTracking = withTracking(mapTrackingToProps)(EditItems);
+
+export default EditItemsWithTracking;

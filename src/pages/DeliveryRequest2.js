@@ -56,7 +56,7 @@ function DeliveryRequest2(props) {
     props.trackMarkRequestAsDone();
   }
 
-  function clickItem() {
+  function onClickItem() {
     props.trackRequestItemClick();
   }
 
@@ -90,7 +90,7 @@ function DeliveryRequest2(props) {
       <div className="body">
         {initialItems.map((item) => (
           <div>
-            <Item item={item} onClick={clickItem}></Item>
+            <Item item={item} onClick={onClickItem}></Item>
           </div>
         ))}
         <div class="proceed-button" align="center">

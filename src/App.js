@@ -30,16 +30,30 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory,
 } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import { TrackerProvider } from 'react-tracker'
-import configuredTracker from './tracking/configureTracker';
+import { withTracking } from 'react-tracker';
+import { navigateBack } from './tracking/events/events';
 
-function App() {
+function App(props) {
   const [requests, setRequests] = useState([]);
   const [volunteerLock, setVolunteerLock] = useState(false);
+
+  useEffect(() => {
+    function onBackButtonEvent(e) {
+      props.trackBackNavigation();
+    }
+
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener('popstate', onBackButtonEvent);
+
+    return () => {
+      window.removeEventListener('popstate', onBackButtonEvent);
+    }
+  }, []);
 
   return (
     <Container
@@ -50,8 +64,8 @@ function App() {
         marginTop: "6vh",
       }}
     >
-      <TrackerProvider tracker={configuredTracker}>
-      <Router>
+      {/* <TrackerProvider tracker={configuredTracker}> */}
+      {/* <Router> */}
         <Switch>
           <Route
             exact
@@ -144,10 +158,19 @@ function App() {
           ></Route>
           <Route exact path="/chat" render={() => <Chat />}></Route>
         </Switch>
-      </Router>
-      </TrackerProvider>
+      {/* </Router> */}
+      {/* </TrackerProvider> */}
     </Container>
   );
 }
 
-export default App;
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackBackNavigation: () =>
+      trackEvent(navigateBack()),
+  }
+};
+
+const AppWithTracking = withTracking(mapTrackingToProps)(App);
+
+export default AppWithTracking;

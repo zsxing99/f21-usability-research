@@ -18,7 +18,7 @@ export const navigateBack = () => {
     return step(
         null,
         Interaction.CLICK,
-        Interaction.BACK,
+        Action.BACK,
         `User elected to navigate back to the previous page.`
     )
 }
@@ -110,5 +110,74 @@ export const requestItemClick = () => {
         Interaction.CLICK,
         Action.NONE,
         "User clicked an item."
+    )
+};
+
+export const calendarClick = () => {
+    return step(
+        "ON_DEMAND_REQUEST",
+        Interaction.CLICK,
+        Action.NONE,
+        "User clicked on request calendar."
+    )
+};
+
+/**
+ * EDIT REQUEST ITEMS PAGE EVENTS
+ */
+export const newRequestItemDetailChange = () => {
+    return step(
+        "EDIT_REQUEST_ITEMS",
+        Interaction.WRITE,
+        Action.NONE,
+        "User elected to change a new request item detail."
+    )
+}
+
+export const newRequestItemDetailSubmit = () => {
+    return step(
+        "EDIT_REQUEST_ITEMS",
+        Interaction.CLICK,
+        Action.SUBMIT,
+        "User elected to submit a new request item detail."
+    )
+}
+
+/**
+ * EDIT REQUEST ITEM DETAILS PAGE EVENTS
+ */
+export const requestItemDetailChange = () => {
+    return step(
+        "EDIT_REQUEST_ITEM_DETAILS",
+        Interaction.WRITE,
+        Action.NONE,
+        "User elected to change the request item details."
+    )
+};
+
+export const requestItemDetailSubmit = () => {
+    return step(
+        "EDIT_REQUEST_ITEM_DETAILS",
+        Interaction.CLICK,
+        Action.SUBMIT,
+        "User elected to submit the request item details changes."
+    )
+};
+
+export const requestItemDetailCancel = () => {
+    return step(
+        "EDIT_REQUEST_ITEM_DETAILS",
+        Interaction.CLICK,
+        Action.CANCEL,
+        "User elected to undo the request item details changes."
+    )
+};
+
+export const requestItemDelete = () => {
+    return step(
+        "EDIT_REQUEST_ITEM_DETAILS",
+        Interaction.CLICK,
+        Action.SUBMIT,
+        "User elected to delete the request item."
     )
 };
