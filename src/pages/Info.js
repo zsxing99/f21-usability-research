@@ -9,7 +9,7 @@ export default function Info() {
   return (
     <>
       <TitleBar title="Help" selected="help"></TitleBar>
-      <div className="body">
+      <div class="body faq">
         <h2>Subscription Request vs. On-demand Request</h2>
         <h3>Subscription Request</h3>
         <div>
