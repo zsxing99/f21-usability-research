@@ -182,7 +182,8 @@ p {
   width: 60px;
   height: 60px;
 
-  background: #990909;
+  /* background: #00000036; */
+  background-image: url("./default.png");
   border-radius: 8px;
 }
 
