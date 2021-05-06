@@ -80,14 +80,11 @@ export default function ViewRequests() {
         <br />
         <h2>Requests for the Week </h2>
         <br />
-        {/* </div> */}
-
         <div align="center"></div>
-        {/* <div class="ex1"> */}
         <div className="calendar">
           <Calendar />
         </div>
-        {/* </div> */}
+        <br></br>
       </div>
     </>
   );
