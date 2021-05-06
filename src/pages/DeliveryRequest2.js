@@ -46,7 +46,7 @@ export default function DeliveryRequest2() {
 
   function clickDone() {
     alert(" Are you sure you want to mark the Request as Done?");
-    history.push("/view-volunteer-requests");
+    history.push("/");
   }
   function callAlert() {
     // alert(" Are you sure you want to Call? Standard Carrier charges apply!");

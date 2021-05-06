@@ -58,7 +58,7 @@ export default function EditItems() {
             </Col>
             <Col xs="3">
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Qty"
                 value={itemQty}
                 onChange={(e) => setItemQty(e.target.value)}
