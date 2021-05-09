@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import { useState } from 'react';
-import * as Survey from "survey-react";
-import "survey-react/survey.css";
+import * as Survey from 'survey-react';
+import 'survey-react/survey.css';
 import Modal from 'react-modal';
-import { sendResult } from "../utils/usabilityStudy"; 
+import { sendResult } from '../utils/usabilityResult'; 
+import { getTaskGroup, getTask } from '../utils/usabilityTasks';
 
 const TASK_NUM = 5;
 
@@ -35,8 +36,16 @@ const init = {
       questions: [
         {
           type: "html",
-          html: "You are going to participate in a usability study for BenevolveBuddy application. \
-                Please click on <b>Begin</b> button when you are ready."
+          html: `
+            You are going to participate in a usability study for BenevolveBuddy application.
+            We are studying how machine learning can be leveraged to infer the usability of 
+            an application. You can help us by participating in a usability testing activity.
+            It will take only a few minutes. 
+            <br/><br/>
+            You will be using an app meant for volunteers interested in helping out individuals in need.  Volunteers can deliver essentials to people who cannot get out of their homes. You will go through the activity  by performing 5 tasks After each task, you will take a short survey.
+            <br/><br/>
+            Please click on <b>Begin</b> button when you are ready.
+            `
         }
       ],
     },
@@ -113,16 +122,19 @@ const init = {
 };
 
 const beginTask = (taskId) => {
+  const taskGroup = localStorage.getItem('taskGroup');
+  const task = getTask(taskGroup, taskId);
   return {
-    title: `Task ${taskId}`,
-    description: "Begin New Task",    
+    title: `Task ${taskId} out of 5`,
+    description: `${task.title}`,    
     questions: [
       {
         type: "html",
         html: `
           You are about begin task ${taskId} of the usability study.
-          For this task, you will be (task description).
-          <br/>
+          <br/><br/>
+          ${task.description}
+          <br/><br/>
           Please click on <b>Complete</b> button when you are ready to start the task.
         `
       }
@@ -227,6 +239,7 @@ export default function ParticipantSurvey(props) {
 
     // Begin the usability test process, starting from task 1
     localStorage.setItem('demographics', JSON.stringify(demographics));
+    localStorage.setItem('taskGroup', getTaskGroup());
     localStorage.setItem('taskId', 1);
     localStorage.setItem('taskComplete', false);
     localStorage.setItem('taskInProgress', false);

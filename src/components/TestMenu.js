@@ -12,24 +12,19 @@ import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 const useStyles = makeStyles((theme) => ({
   bottomRight: {
     backgroundColor: "#00acc1 !important",
-    borderRadius: "50% !important",
     border: "0px !important",
     position: "fixed",
-    bottom: theme.spacing(3),
-    right: theme.spacing(3),
-  }
+    bottom: theme.spacing(1),
+    right: theme.spacing(1),
+  },
 }));
-
-const onClick = () => {
-  localStorage.setItem('taskComplete', true);
-}
 
 export default function TestMenu(props) {
   const classes = useStyles();
 
   return(
-    <Fab className={classes.bottomRight} onClick={props.onClick}>
-      <AssignmentTurnedInIcon />
+    <Fab variant="extended" className={classes.bottomRight} onClick={props.onClick}>
+      Finish Task
     </Fab>
   )
 }
