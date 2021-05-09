@@ -77,7 +77,6 @@ function App(props) {
     >
       {/* <TrackerProvider tracker={configuredTracker}> */}
       {/* <Router> */}
-      <TestMenu onClick={onTestMenuClick}/>
       {/* <SurveyComponent isVisible={isVisible}></SurveyComponent> */}
         <Switch>
           <Route
@@ -173,7 +172,9 @@ function App(props) {
         </Switch>
       {/* </Router> */}
       {/* </TrackerProvider> */}
+      <TestMenu onClick={onTestMenuClick}/>
     </Container>
+    
   );
 }
 
