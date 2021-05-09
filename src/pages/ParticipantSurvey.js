@@ -227,10 +227,10 @@ export default function ParticipantSurvey(props) {
 
     // Begin the usability test process, starting from task 1
     localStorage.setItem('demographics', JSON.stringify(demographics));
-    localStorage.setItem('taskId', 4);
+    localStorage.setItem('taskId', 1);
     localStorage.setItem('taskComplete', false);
     localStorage.setItem('taskInProgress', false);
-    setTaskId(4);
+    setTaskId(1);
   }
 
   function onCompleteBeginTask(result) {
