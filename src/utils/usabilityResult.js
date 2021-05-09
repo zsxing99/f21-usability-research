@@ -1,5 +1,6 @@
 import {v4 as uuidv4} from 'uuid';
 import { getTask } from './usabilityTasks';
+import axios from 'axios';
 
 function createResultPayload() {
     var payload = {};
@@ -32,12 +33,13 @@ export function sendResult() {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': '*'
         },
         body: JSON.stringify(payload),
     };
 
-    fetch('https://17vdvvwjlc.execute-api.us-east-2.amazonaws.com/prod/usability-data', requestOpts)
+    const proxyURL = 'https://damp-shelf-98234.herokuapp.com/';
+
+    fetch(proxyURL + 'https://17vdvvwjlc.execute-api.us-east-2.amazonaws.com/prod/usability-data', requestOpts)
         .then(response => console.log(response))
         .catch(error => console.log(error));
 }
