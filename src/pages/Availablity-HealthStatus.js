@@ -4,32 +4,21 @@ import TitleBar from "../components/TitleBar";
 import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
+import { withTracking } from 'react-tracker';
+import { availabilitySubmit } from "../tracking/events/events";
+
 export let disableVolunteerFlag = false;
-export default function AvailablityHealthStatus(props) {
+
+function AvailablityHealthStatus(props) {
   const history = useHistory();
 
   function handleSubmit(event) {
-    // if (
-    //   event.target.elements.breathe.checked ||
-    //   event.target.elements.fever.checked ||
-    //   event.target.elements.cold.checked ||
-    //   event.target.elements.sense.checked ||
-    //   event.target.elements.fatigue.checked ||
-    //   event.target.elements.bodyaches.checked
-    // ) {
-    //   // console.log(volunteerLock);
-    //   props.setVolunteerLock(true);
-    //   alert(
-    //     "Covid Symptoms observed. You are not Eligible for Volunteering. Account Disable for 14 days"
-    //   );
-    //   // history.push("/login");
-    //   history.push("/locked", { lock: true });
-    //   disableVolunteerFlag = true;
-    // } else {
     alert("Data Updated");
     history.push("/volunteer-dashboard");
-    // }
+
     event.preventDefault();
+
+    props.trackAvailabilitySubmit();
   }
 
   return (
@@ -72,3 +61,15 @@ export default function AvailablityHealthStatus(props) {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackAvailabilitySubmit: () =>
+      trackEvent(availabilitySubmit()),
+  
+  };
+};
+
+const AvailabilityHealthStatusWithTracking = withTracking(mapTrackingToProps)(AvailablityHealthStatus);
+
+export default AvailabilityHealthStatusWithTracking;

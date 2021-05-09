@@ -4,8 +4,15 @@ import { editedItems } from "./EditItems";
 import { requestFor } from "./ViewRequests";
 import TitleBar from "../components/TitleBar";
 
+import { withTracking } from 'react-tracker';
+import { 
+  navigateTo,
+  markRequestAsDone,
+  requestItemClick,
+} from "../tracking/events/events";
+
 export let initialItems = [];
-export default function DeliveryRequest2() {
+function DeliveryRequest2(props) {
   const history = useHistory();
   const sentMsg = [
     requestFor +
@@ -21,9 +28,8 @@ export default function DeliveryRequest2() {
     { itemName: "Organic Milk", itemQty: 1 },
     { itemName: "Orange", itemQty: 1 },
   ];
-  console.log("Edited Items", editedItems);
-  //   if (editedItems.length == 0) initialItems = itemList;
-  //   else initialItems = editedItems;
+  // console.log("Edited Items", editedItems);
+
   initialItems = editedItems.length == 0 ? itemList : editedItems;
   function handleSubmit(event) {
     if (
@@ -47,13 +53,21 @@ export default function DeliveryRequest2() {
   function clickDone() {
     alert(" Are you sure you want to mark the Request as Done?");
     history.push("/");
+    props.trackMarkRequestAsDone();
   }
+
+  function onClickItem() {
+    props.trackRequestItemClick();    
+  }
+
   function callAlert() {
     // alert(" Are you sure you want to Call? Standard Carrier charges apply!");
     // TODO: Disable volunteer and Redirect to Dashboard
     // history.push("/delivery-request-active");
     history.push("/info");
+    props.trackNavigation("HELP");
   }
+
   return (
     <>
       {/* <div className="library-fontello">
@@ -76,12 +90,15 @@ export default function DeliveryRequest2() {
       <div className="body">
         {initialItems.map((item) => (
           <div>
-            <Item item={item}></Item>
+            <Item item={item} onClick={onClickItem}></Item>
           </div>
         ))}
         <div class="proceed-button" align="center">
           <input
-            onClick={() => history.push("/edit-item-list")}
+            onClick={() => {
+              history.push("/edit-item-list");
+              props.trackNavigation("EDIT_REQUEST_ITEMS");
+            }}
             type="submit"
             className="btn-primary btn"
             value="Edit Items"
@@ -123,6 +140,7 @@ export default function DeliveryRequest2() {
                     className="library-fontello"
                     onClick={() => {
                       history.push({ pathname: "/chat", state: chat });
+                      props.trackNavigation("REQUEST_CHAT");
                     }}
                   >
                     <i class="icon-comment-alt"></i> Chat{" "}
@@ -229,3 +247,19 @@ export default function DeliveryRequest2() {
     // </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackNavigation: (pageName) =>
+      trackEvent(navigateTo(pageName)),
+    trackRequestItemClick: () =>
+      trackEvent(requestItemClick()),
+    trackMarkRequestAsDone: () =>
+      trackEvent(markRequestAsDone()),
+  }
+}
+
+const DeliveryRequest2WithTracking = withTracking(mapTrackingToProps)(DeliveryRequest2);
+
+export default DeliveryRequest2WithTracking;
+

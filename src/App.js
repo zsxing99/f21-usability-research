@@ -22,6 +22,7 @@ import DeliveryRequest2 from "./pages/DeliveryRequest2";
 import DeliveryRequest from "./pages/DeliveryRequest";
 import Chat from "./pages/Chat";
 import Tabs from "./components/Tabs";
+import TestMenu from './components/TestMenu';
 
 import Subscription from "./pages/Subscription";
 
@@ -30,13 +31,40 @@ import {
   Switch,
   Route,
   Redirect,
+  useHistory,
 } from "react-router-dom";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function App() {
+import { withTracking } from 'react-tracker';
+import { navigateBack } from './tracking/events/events';
+
+function App(props) {
+  const [isVisible, setIsVisible] = useState(false);
   const [requests, setRequests] = useState([]);
   const [volunteerLock, setVolunteerLock] = useState(false);
+
+  useEffect(() => {
+
+    function onBackButtonEvent(e) {
+      props.trackBackNavigation();
+    }
+
+    window.history.pushState(null, null, window.location.pathname);
+    window.addEventListener('popstate', onBackButtonEvent);
+    return () => {
+      window.removeEventListener('popstate', onBackButtonEvent);
+    }
+  }, []);
+
+  const onTestMenuClick = () => {
+    setIsVisible(true);
+    localStorage.setItem('taskComplete', true);
+    localStorage.setItem('taskInProgress', true);
+    window.location.href = "/volunteer-dashboard";
+  }
+
+  // add default confirmation
 
   return (
     <Container
@@ -47,7 +75,10 @@ function App() {
         marginTop: "6vh",
       }}
     >
-      <Router>
+      {/* <TrackerProvider tracker={configuredTracker}> */}
+      {/* <Router> */}
+      <TestMenu onClick={onTestMenuClick}/>
+      {/* <SurveyComponent isVisible={isVisible}></SurveyComponent> */}
         <Switch>
           <Route
             exact
@@ -140,9 +171,19 @@ function App() {
           ></Route>
           <Route exact path="/chat" render={() => <Chat />}></Route>
         </Switch>
-      </Router>
+      {/* </Router> */}
+      {/* </TrackerProvider> */}
     </Container>
   );
 }
 
-export default App;
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackBackNavigation: () =>
+      trackEvent(navigateBack()),
+  }
+};
+
+const AppWithTracking = withTracking(mapTrackingToProps)(App);
+
+export default AppWithTracking;

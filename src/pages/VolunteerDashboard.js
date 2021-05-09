@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "../styles/App.css";
 import Tabs from "../components/Tabs";
 import TitleBar from "../components/TitleBar";
+import ParticipantSurvey from './ParticipantSurvey';
 
-export default function VolunteerDashboard(props) {
+import { withTracking } from 'react-tracker';
+import {
+  navigateTo
+} from "../tracking/events/events";
+
+function VolunteerDashboard(props) {
   const history = useHistory();
+  
   return (
     <>
+      <ParticipantSurvey isVisible="true"></ParticipantSurvey>
       <TitleBar title="Dashboard" selected="home" isHome="true" />
       <div className="body">
         {props.lock ? (
@@ -17,6 +25,7 @@ export default function VolunteerDashboard(props) {
             class="volunteer-dashboard-option"
             onClick={() => {
               history.push("/volunteer-health");
+              props.trackNavigation("AVAILABILITY_HEALTH_STATUS");
             }}
           >
             <div align="center" className="library-fontello">
@@ -32,6 +41,8 @@ export default function VolunteerDashboard(props) {
           class="volunteer-dashboard-option"
           onClick={() => {
             history.push("/view-volunteer-requests");
+
+            props.trackNavigation("REQUESTS");
           }}
         >
           <div align="center" className="library-fontello">
@@ -45,3 +56,14 @@ export default function VolunteerDashboard(props) {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackNavigation: (pageName) =>
+      trackEvent(navigateTo(pageName)),
+  }
+}
+
+const VolunteerDashboardWithTracking = withTracking(mapTrackingToProps)(VolunteerDashboard);
+
+export default VolunteerDashboardWithTracking;

@@ -1,8 +1,16 @@
-import Item from "./Item";
-import { useHistory } from "react-router-dom";
-import { requestFor } from "./ViewRequests";
+import Item from './Item';
+import { useHistory } from 'react-router-dom';
+import { requestFor } from './ViewRequests';
 import TitleBar from "../components/TitleBar";
-export default function DeliveryRequest() {
+
+import { withTracking } from 'react-tracker';
+import { 
+  navigateTo,
+  markRequestAsDone,
+  requestItemClick,
+} from "../tracking/events/events";
+
+function DeliveryRequest(props) {
   const history = useHistory();
   const itemList = [
     { itemName: "Organic Milk", itemQty: 1 },
@@ -17,6 +25,10 @@ export default function DeliveryRequest() {
   const chat = { title: "Mary's Request", sent: sentMsg, received: [] };
   function handleSubmit(event) {
     event.preventDefault();
+  }
+
+  function onItemClick() {
+    props.trackRequestItemClick();
   }
 
   return (
@@ -41,7 +53,7 @@ export default function DeliveryRequest() {
       <div className="body">
         {itemList.map((item) => (
           <div>
-            <Item item={item}></Item>
+            <Item item={item} onClick={onItemClick}></Item>
           </div>
         ))}
         {/* <div class="table">
@@ -72,7 +84,8 @@ export default function DeliveryRequest() {
           ></input> */}
           <button
             onClick={() => {
-              history.push({ pathname: "/chat", state: chat });
+              history.push({ pathname: '/chat', state: chat });
+              props.trackNavigation("REQUEST_CHAT");
             }}
           >
             Process Delivery
@@ -82,3 +95,18 @@ export default function DeliveryRequest() {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackNavigation: (pageName) =>
+      trackEvent(navigateTo(pageName)),
+    trackRequestItemClick: () =>
+      trackEvent(requestItemClick()),
+    trackMarkRequestAsDone: () =>
+      trackEvent(markRequestAsDone()),
+  }
+}
+
+const DeliveryRequestWithTracking = withTracking(mapTrackingToProps)(DeliveryRequest);
+
+export default DeliveryRequestWithTracking;

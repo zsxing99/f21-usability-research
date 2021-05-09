@@ -2,6 +2,14 @@ import React, { Component } from "react";
 import { DayPilot, DayPilotCalendar } from "daypilot-pro-react";
 import "./CalendarStyles.css";
 
+import { withTracking } from 'react-tracker';
+import { 
+  availabilityChange,
+  availabilityDetailChange,
+  availabilityDetailSubmit,
+  availabilityDetailCancel 
+} from '../tracking/events/events';
+
 const styles = {
   left: {
     marginRight: "10px",
@@ -65,6 +73,8 @@ class Calendar extends Component {
           backColor: "#AA767C",
         };
         dp.events.add(new DayPilot.Event(eventDesc));
+
+        props.trackAvailabilityChange();
         // });
       },
       eventDeleteHandling: "Update",
@@ -73,14 +83,21 @@ class Calendar extends Component {
         DayPilot.Modal.prompt("Update event text:", args.e.text()).then(
           function (modal) {
             if (!modal.result) {
+              props.trackAvailabilityDetailCancel();
+
               return;
             }
             args.e.data.text = modal.result;
             dp.events.update(args.e);
+
+            props.trackAvailabilityDetailSubmit();
           }
         );
+
+        props.trackAvailabilityDetailChange();
       },
       scrollToHour: 20,
+      // TODO: add tracker for scroll event if possible
     };
   }
 
@@ -109,4 +126,22 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackAvailabilityChange: () => 
+      trackEvent(availabilityChange()),
+
+    trackAvailabilityDetailChange: () => 
+      trackEvent(availabilityDetailChange()),
+
+    trackAvailabilityDetailSubmit: () =>
+      trackEvent(availabilityDetailSubmit()),
+    
+    trackAvailabilityDetailCancel: () => 
+      trackEvent(availabilityDetailCancel()),
+  };
+};
+
+const CalendarWithTracking = withTracking(mapTrackingToProps)(Calendar);
+
+export default CalendarWithTracking;

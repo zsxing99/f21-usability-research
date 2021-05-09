@@ -5,8 +5,18 @@ import { useHistory } from "react-router-dom";
 import TitleBar from "../components/TitleBar";
 // import defItemList from "./EditItems";
 
+import { withTracking } from 'react-tracker';
+import {
+  navigateTo,
+  requestItemDetailChange,
+  requestItemDetailSubmit,
+  requestItemDetailCancel,
+  requestItemDelete
+} from '../tracking/events/events';
+import { propTypes } from "react-bootstrap/esm/Image";
+
 export let updatedItems = [];
-const EditItem = () => {
+const EditItem = (props) => {
   const history = useHistory();
   const [itemName, setItemName] = useState(
     history.location.state.item.itemName
@@ -39,12 +49,16 @@ const EditItem = () => {
     } else {
       alert("Please enter proper information in all the fields");
     }
+
+    props.trackRequestItemDetailSubmit();
   }
 
   function handleCancel(e) {
     history.push({
       pathname: "/edit-item-list",
     });
+
+    props.trackRequestItemDetailCancel();
   }
 
   function handleDeleteItem(e) {
@@ -60,11 +74,10 @@ const EditItem = () => {
       pathname: "/edit-item-list",
       state: { itemList: newItems },
     });
+
+    props.trackRequestItemDelete();
   }
 
-  function routeToEditItem(e) {
-    console.log(e);
-  }
   return (
     <>
       {/* <div class="library-fontello">
@@ -81,7 +94,10 @@ const EditItem = () => {
                   type="text"
                   placeholder="Item Name"
                   value={itemName}
-                  onChange={(e) => setItemName(e.target.value)}
+                  onChange={(e) => {
+                    setItemName(e.target.value);
+                    props.trackRequestItemDetailChange();
+                  }}
                   required
                 ></Form.Control>
               </Col>
@@ -90,7 +106,10 @@ const EditItem = () => {
                   type="number"
                   placeholder="Qty"
                   value={itemQty}
-                  onChange={(e) => setItemQty(e.target.value)}
+                  onChange={(e) => {
+                    setItemQty(e.target.value);
+                    props.trackRequestItemDetailChange();
+                  }}
                   required
                 ></Form.Control>
               </Col>
@@ -124,4 +143,23 @@ const EditItem = () => {
     </>
   );
 };
-export default EditItem;
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackRequestItemDetailChange: () =>
+      trackEvent(requestItemDetailChange()),
+    
+    trackRequestItemDetailSubmit: () =>
+      trackEvent(requestItemDetailSubmit()),
+
+    trackRequestItemDetailCancel: () =>
+      trackEvent(requestItemDetailCancel()),
+
+    trackRequestItemDelete: () =>
+      trackEvent(requestItemDelete()),
+  }
+};
+
+const EditItemWithTracking = withTracking(mapTrackingToProps)(EditItem);
+
+export default EditItemWithTracking;

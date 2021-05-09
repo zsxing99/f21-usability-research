@@ -9,16 +9,11 @@ export default function Item(props) {
     classVal = classVal + " orange";
   }
   // console.log(itemList);
-
-  // function routeToEditItem(e) {
-  //   console.log("Routing to :", item.itemList);
-  //   const newState = { item: item.item, itemList: item.itemList };
-  //   history.push({ pathname: "/edit-item-list/item", state: newState });
-  // }
+  // console.log(props.onClick);
 
   return (
     <>
-      <div class="item">
+      <div class="item" onClick={props.onClick} >
         <div id={props.item.itemName} class={classVal}></div>
         <div class="req-item">
           <div class="item-name">{props.item.itemName}</div>

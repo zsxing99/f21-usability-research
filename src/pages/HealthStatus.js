@@ -4,8 +4,12 @@ import TitleBar from "../components/TitleBar";
 import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
+import { withTracking } from 'react-tracker';
+import { statusSubmit, statusChange } from '../tracking/events/events'
+
 export let disableVolunteerFlag = false;
-export default function HealthStatus(props) {
+
+function HealthStatus(props) {
   const history = useHistory();
   const [disableSubmit, setDisableSubmit] = useState(true);
   const [nota, setNota] = useState(false);
@@ -15,6 +19,10 @@ export default function HealthStatus(props) {
   const [sense, setSense] = useState(false);
   const [fatigue, setFatigue] = useState(false);
   const [bodyaches, setBodyaches] = useState(false);
+
+  function handleHealthStatusChange() {
+    props.trackHealthStatusChange();
+  }
 
   function handleSubmit(event) {
     // if nothing is checked
@@ -49,6 +57,8 @@ export default function HealthStatus(props) {
       history.push("/edit-volunteer-data");
     }
     event.preventDefault();
+
+    props.trackAvailabilityHealthStatusUpdate();
   }
 
   function submitDisabled(event) {
@@ -128,6 +138,7 @@ export default function HealthStatus(props) {
                 disabled={nota}
                 // onChange={handleCheckbox}
                 className="input-checkbox"
+                onClick={handleHealthStatusChange}
               />
               <label htmlFor="breathe">Breathing Issues</label>
             </div>
@@ -138,6 +149,7 @@ export default function HealthStatus(props) {
                 name="fever"
                 // onChange={handleCheckbox}
                 className="input-checkbox"
+                onClick={handleHealthStatusChange}
               />
               <label htmlFor="fever">Fever</label>
             </div>
@@ -148,6 +160,7 @@ export default function HealthStatus(props) {
                 name="cold"
                 // onChange={handleCheckbox}
                 className="input-checkbox"
+                onClick={handleHealthStatusChange}
               />
               <label htmlFor="cold">Cold/Cough</label>
             </div>
@@ -158,6 +171,7 @@ export default function HealthStatus(props) {
                 name="sense"
                 // onChange={handleCheckbox}
                 className="input-checkbox"
+                onClick={handleHealthStatusChange}
               />
               <label htmlFor="sense">Lost sense of smell/taste</label>
             </div>
@@ -168,6 +182,7 @@ export default function HealthStatus(props) {
                 name="fatigue"
                 // onChange={handleCheckbox}
                 className="input-checkbox"
+                onClick={handleHealthStatusChange}
               />
               <label htmlFor="fatigue">Fatigue</label>
             </div>
@@ -178,6 +193,7 @@ export default function HealthStatus(props) {
                 name="bodyaches"
                 // onChange={handleCheckbox}
                 className="input-checkbox"
+                onClick={handleHealthStatusChange}
               />
               <label htmlFor="bodyaches">Body Aches</label>
             </div>
@@ -207,3 +223,18 @@ export default function HealthStatus(props) {
     </>
   );
 }
+
+const mapTrackingToProps = trackEvent => {
+  return {
+    trackAvailabilityHealthStatusUpdate: () =>
+      trackEvent(statusSubmit()),
+    
+    trackHealthStatusChange: () => 
+      trackEvent(statusChange()),
+
+  };
+};
+
+const HealthStatusWithTracking = withTracking(mapTrackingToProps)(HealthStatus);
+
+export default HealthStatusWithTracking;
