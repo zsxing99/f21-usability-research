@@ -1,7 +1,9 @@
 export const onAction = (event = {}, eventsHistory) => {
-    // TODO: add code ot push each event to DB
-    // store locally on a task-level
-    // chronological order
     console.log("logging event: \n" + JSON.stringify(event, null, 2));
+
+    var events = JSON.parse(localStorage.getItem('events'));
+    events.push(event);
+    localStorage.setItem('events', JSON.stringify(events));
+
     return event;
 }

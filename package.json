@@ -4,6 +4,8 @@
   "private": true,
   "main": "./build/index.js",
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
     "@testing-library/jest-dom": "^5.11.6",
     "@testing-library/react": "^11.2.2",
     "@testing-library/user-event": "^12.2.2",
@@ -19,6 +21,7 @@
     "react-scripts": "4.0.1",
     "react-tracker": "0.0.8",
     "survey-react": "^1.8.43",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

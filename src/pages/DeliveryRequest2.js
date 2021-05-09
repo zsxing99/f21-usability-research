@@ -52,12 +52,12 @@ function DeliveryRequest2(props) {
 
   function clickDone() {
     alert(" Are you sure you want to mark the Request as Done?");
-    history.push("/view-volunteer-requests");
+    history.push("/");
     props.trackMarkRequestAsDone();
   }
 
   function onClickItem() {
-    props.trackRequestItemClick();
+    props.trackRequestItemClick();    
   }
 
   function callAlert() {

@@ -1,0 +1,51 @@
+{
+  "id": "0123",
+  "demographics": {
+    "age": "25",
+    "gender": "M"
+  },
+  "tasks": [
+    {
+      "id": "00",
+      "events": [
+        {
+          "type": "STEP",
+          "data": {
+            "pageName": "AVAILABILITY_HEALTH_STATUS",
+            "interactionType": "click",
+            "actionType": "navigation",
+            "action": "User elected to navigate to AVAILABILITY_HEALTH_STATUS page."
+          },
+          "timestamp": "2021-05-01T14:09:43-04:00"
+        }
+      ],
+      "survey": ["3", "4", "1"]
+    },
+    {
+      "id": "01",
+      "events": [
+        {
+          "type": "STEP",
+          "data": {
+            "pageName": "AVAILABILITY_HEALTH_STATUS",
+            "interactionType": "click",
+            "actionType": "navigation",
+            "action": "User elected to navigate to AVAILABILITY_HEALTH_STATUS page."
+          },
+          "timestamp": "2021-05-01T14:09:43-04:00"
+        },
+        {
+          "type": "STEP",
+          "data": {
+            "pageName": "AVAILABILITY_HEALTH_STATUS",
+            "interactionType": "click",
+            "actionType": "navigation",
+            "action": "User elected to navigate to AVAILABILITY_HEALTH_STATUS page."
+          },
+          "timestamp": "2021-05-01T14:09:43-04:00"
+        }
+      ],
+      "survey": ["2", "3", "4"]
+    }
+  ]
+}

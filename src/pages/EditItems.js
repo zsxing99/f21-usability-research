@@ -70,7 +70,7 @@ function EditItems(props) {
             </Col>
             <Col xs="3">
               <Form.Control
-                type="text"
+                type="number"
                 placeholder="Qty"
                 value={itemQty}
                 onChange={(e) => {

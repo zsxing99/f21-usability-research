@@ -29,6 +29,7 @@ const EditItem = (props) => {
   console.log(history.location.state);
 
   function handleSaveItem(e) {
+    console.log(typeof itemQty);
     if (itemName && itemQty) {
       //  Remove the original item
       const newItems = [];
@@ -46,7 +47,7 @@ const EditItem = (props) => {
         state: { itemList: newItems },
       });
     } else {
-      alert("Please enter information in all the fields");
+      alert("Please enter proper information in all the fields");
     }
 
     props.trackRequestItemDetailSubmit();
@@ -102,7 +103,7 @@ const EditItem = (props) => {
               </Col>
               <Col xs="3">
                 <Form.Control
-                  type="text"
+                  type="number"
                   placeholder="Qty"
                   value={itemQty}
                   onChange={(e) => {

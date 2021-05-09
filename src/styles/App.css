@@ -182,7 +182,8 @@ p {
   width: 60px;
   height: 60px;
 
-  background: #990909;
+  /* background: #00000036; */
+  background-image: url("./default.png");
   border-radius: 8px;
 }
 
@@ -737,6 +738,15 @@ a {
 
 .input-radio {
   margin-right: 20px;
+}
+
+.faq {
+  background-color: #ffffff44;
+  border: 1px solid rgba(0, 0, 0, 0.267);
+  padding: 10px;
+  /* border-width: 1px; */
+  /* border-color: #434d65; */
+  border-radius: 10px;
 }
 
 .tab-list {

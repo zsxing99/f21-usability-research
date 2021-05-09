@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import "../styles/App.css";
 import Tabs from "../components/Tabs";
 import TitleBar from "../components/TitleBar";
+import ParticipantSurvey from './ParticipantSurvey';
 
 import { withTracking } from 'react-tracker';
 import {
@@ -11,8 +12,10 @@ import {
 
 function VolunteerDashboard(props) {
   const history = useHistory();
+  
   return (
     <>
+      <ParticipantSurvey isVisible="true"></ParticipantSurvey>
       <TitleBar title="Dashboard" selected="home" isHome="true" />
       <div className="body">
         {props.lock ? (
