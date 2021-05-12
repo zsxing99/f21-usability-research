@@ -221,7 +221,7 @@ const done = {
       name: "comment",
       type: "comment",
       title: "Please provide any additional comments you would like to share. If you would \
-              like to be communicated in the future with the study results, please leave \
+              like to be contacted in the future with the study results, please leave \
               your e-mail address."
     }
   ]
