@@ -1,31 +1,36 @@
 const task1 = {
   id: '00',
   title: 'Fill in Availability',
-  description: 'You are a volunteer who wants to help with some existing requests. Go ahead and provide the time slots when you are available to volunteer.'
+  scenario: 'You have a fever of 101 degrees.',
+  description: 'Use the app to update your health status.'
 };
 
 const task2 = {
   id: '01',
   title: 'Edit Health Status',
-  description: 'Say you have a fever of 101 degrees. Go ahead and update your health condition in the app.'
+  scenario: 'You are a volunteer who wants to help with some existing requests.',
+  description: 'Use the app to provide the time slots that you’re available for volunteering.'
 };
 
 const task3 = {
   id: '02',
   title: 'Complete an On-demand Request',
-  description: 'Mary has request some items as part of her "On-Demand" request. You went to a supermarket and delivered the items to Mary. Now go ahead and complete her on-demand request in the app.'
+  scenario: 'Mary has requested some items as part of her ‘On-demand’ request. You went to a supermarket and delivered the items to Mary.',
+  description: 'Complete her on-demand request in the app.'
 };
 
 const task4 = {
   id: '03',
   title: 'Edit an Item in a Subscription Request',
-  description: 'Mary has a weekly subscription request that she wants to modify. She just texted you that she wants to add six oranges to her subscription request. Go ahead and make those changes to her request by adding six oranges.'
+  scenario: 'It is time for Mary’s weekly subscription request. There are no changes to her order; thus, you went to a supermarket and delivered her items.',
+  description: 'Complete her subscription request.'
 };
 
 const task5 = {
   id: '04',
   title: 'Complete a Subscription Request',
-  description: `It is time for Mary's weekly subscription request. You can assume that there are no changes to her order and that you went to a supermarket and delivered the items to Mary. Go ahead and complete her subscription request.`
+  scenario: 'Mary has a weekly subscription request that she wants to modify. She texted, asking you to add 6 oranges to her subscription request.',
+  description: 'Use the app to change her request.'
 };
 
 const groupA = [task2, task1, task3, task4, task5];
