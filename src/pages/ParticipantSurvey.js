@@ -42,7 +42,7 @@ const init = {
             an application. You can help us by participating in a usability testing activity.
             It will take only a few minutes. 
             <br/><br/>
-            You will be using an app meant for volunteers interested in helping out individuals in need.  Volunteers can deliver essentials to people who cannot get out of their homes. You will go through the activity  by performing 5 tasks After each task, you will take a short survey.
+            You will be using an app meant for volunteers interested in helping out individuals in need.  Volunteers can deliver essentials to people who cannot get out of their homes. You will go through the activity by performing 5 tasks. After each task, you will take a short survey.
             <br/><br/>
             Please click on <b>Begin</b> button when you are ready.
             `
@@ -126,7 +126,7 @@ const beginTask = (taskId) => {
   const task = getTask(taskGroup, taskId);
   return {
     title: `Task ${taskId} out of 5`,
-    description: `${task.title}`,    
+    description: `${task.title}`,
     questions: [
       {
         type: "html",
@@ -213,7 +213,7 @@ const finishTask = (taskId) => {
 };
 
 const done = {
-  title: "Finish Up BenevolveBuddy Usability Study",
+  title: "Finishing Up",
   description: "Thank you for participating!",
   showQuestionNumbers: "off",
   questions: [
@@ -221,7 +221,7 @@ const done = {
       name: "comment",
       type: "comment",
       title: "Please provide any additional comments you would like to share. If you would \
-              like to be communicated in the future with the study results, please leave \
+              like to be contacted in the future with the study results, please leave \
               your e-mail address."
     }
   ]
@@ -297,14 +297,13 @@ export default function ParticipantSurvey(props) {
   // select which survey screen to display based on the state'
   var survey;
   var surveyJSON, onComplete;
+  var completeText = "Complete"
   if (!localStorage.getItem('demographics')) {
     surveyJSON = init;
     onComplete = onCompleteInit;
   } else {
     const taskId = JSON.parse(localStorage.getItem('taskId'));
-    const taskInProgress = JSON.parse(localStorage.getItem('taskInProgress'));
     const taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
-    
     if (isDone) {
       surveyJSON = done;
       onComplete = onCompleteDone;
@@ -314,6 +313,7 @@ export default function ParticipantSurvey(props) {
     } else {
       surveyJSON = beginTask(taskId);
       onComplete = onCompleteBeginTask;
+      completeText = "Begin Task"
     }
   }
 
@@ -322,6 +322,7 @@ export default function ParticipantSurvey(props) {
         json={surveyJSON}
         showCompletedPage={false}
         onComplete={onComplete}
+        completeText={completeText}
       />
   );
   
