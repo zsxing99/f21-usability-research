@@ -213,7 +213,7 @@ const finishTask = (taskId) => {
 };
 
 const done = {
-  title: "Finish Up BenevolveBuddy Usability Study",
+  title: "Finishing Up",
   description: "Thank you for participating!",
   showQuestionNumbers: "off",
   questions: [
