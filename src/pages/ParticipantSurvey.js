@@ -126,7 +126,7 @@ const beginTask = (taskId) => {
   const task = getTask(taskGroup, taskId);
   return {
     title: `Task ${taskId} out of 5`,
-    description: `${task.title}`,    
+    description: `${task.title}`,
     questions: [
       {
         type: "html",
@@ -297,14 +297,13 @@ export default function ParticipantSurvey(props) {
   // select which survey screen to display based on the state'
   var survey;
   var surveyJSON, onComplete;
+  var completeText = "Complete"
   if (!localStorage.getItem('demographics')) {
     surveyJSON = init;
     onComplete = onCompleteInit;
   } else {
     const taskId = JSON.parse(localStorage.getItem('taskId'));
-    const taskInProgress = JSON.parse(localStorage.getItem('taskInProgress'));
     const taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
-    
     if (isDone) {
       surveyJSON = done;
       onComplete = onCompleteDone;
@@ -314,6 +313,7 @@ export default function ParticipantSurvey(props) {
     } else {
       surveyJSON = beginTask(taskId);
       onComplete = onCompleteBeginTask;
+      completeText = "Begin Task"
     }
   }
 
@@ -322,6 +322,7 @@ export default function ParticipantSurvey(props) {
         json={surveyJSON}
         showCompletedPage={false}
         onComplete={onComplete}
+        completeText={completeText}
       />
   );
   
