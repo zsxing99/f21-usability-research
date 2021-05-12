@@ -42,7 +42,7 @@ const init = {
             an application. You can help us by participating in a usability testing activity.
             It will take only a few minutes. 
             <br/><br/>
-            You will be using an app meant for volunteers interested in helping out individuals in need.  Volunteers can deliver essentials to people who cannot get out of their homes. You will go through the activity  by performing 5 tasks After each task, you will take a short survey.
+            You will be using an app meant for volunteers interested in helping out individuals in need.  Volunteers can deliver essentials to people who cannot get out of their homes. You will go through the activity by performing 5 tasks. After each task, you will take a short survey.
             <br/><br/>
             Please click on <b>Begin</b> button when you are ready.
             `
