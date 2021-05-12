@@ -133,9 +133,11 @@ const beginTask = (taskId) => {
         html: `
           You are about begin task ${taskId} of the usability study.
           <br/><br/>
-          ${task.description}
+          <u>Scenario:</u> ${task.scenario}
           <br/><br/>
-          Please click on <b>Complete</b> button when you are ready to start the task.
+          <u>Task:</u> ${task.description}
+          <br/><br/>
+          Please click on <b>Begin Task</b> to start the task, and click on <b>Finish Task</b> button to end the task.
         `
       }
     ]
