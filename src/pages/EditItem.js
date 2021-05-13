@@ -5,14 +5,14 @@ import { useHistory } from "react-router-dom";
 import TitleBar from "../components/TitleBar";
 // import defItemList from "./EditItems";
 
-import { withTracking } from 'react-tracker';
+import { withTracking } from "react-tracker";
 import {
   navigateTo,
   requestItemDetailChange,
   requestItemDetailSubmit,
   requestItemDetailCancel,
-  requestItemDelete
-} from '../tracking/events/events';
+  requestItemDelete,
+} from "../tracking/events/events";
 import { propTypes } from "react-bootstrap/esm/Image";
 
 export let updatedItems = [];
@@ -27,6 +27,7 @@ const EditItem = (props) => {
   const originalQty = history.location.state.item.itemQty;
   const [itemList, setItemList] = useState(history.location.state.itemList);
   console.log(history.location.state);
+  const requestFor = history.location.state.requestFor;
 
   function handleSaveItem(e) {
     console.log(typeof itemQty);
@@ -42,9 +43,13 @@ const EditItem = (props) => {
       });
       console.log(newItems);
       updatedItems = newItems;
+      window.localStorage.setItem(
+        requestFor + "-item-list",
+        JSON.stringify(newItems)
+      );
       history.push({
         pathname: "/edit-item-list",
-        state: { itemList: newItems },
+        state: { requestFor },
       });
     } else {
       alert("Please enter proper information in all the fields");
@@ -56,6 +61,7 @@ const EditItem = (props) => {
   function handleCancel(e) {
     history.push({
       pathname: "/edit-item-list",
+      state: { requestFor },
     });
 
     props.trackRequestItemDetailCancel();
@@ -70,9 +76,13 @@ const EditItem = (props) => {
     });
     console.log(newItems);
     updatedItems = newItems;
+    window.localStorage.setItem(
+      requestFor + "-item-list",
+      JSON.stringify(newItems)
+    );
     history.push({
       pathname: "/edit-item-list",
-      state: { itemList: newItems },
+      state: { requestFor },
     });
 
     props.trackRequestItemDelete();
@@ -144,20 +154,16 @@ const EditItem = (props) => {
   );
 };
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackRequestItemDetailChange: () =>
-      trackEvent(requestItemDetailChange()),
-    
-    trackRequestItemDetailSubmit: () =>
-      trackEvent(requestItemDetailSubmit()),
+    trackRequestItemDetailChange: () => trackEvent(requestItemDetailChange()),
 
-    trackRequestItemDetailCancel: () =>
-      trackEvent(requestItemDetailCancel()),
+    trackRequestItemDetailSubmit: () => trackEvent(requestItemDetailSubmit()),
 
-    trackRequestItemDelete: () =>
-      trackEvent(requestItemDelete()),
-  }
+    trackRequestItemDetailCancel: () => trackEvent(requestItemDetailCancel()),
+
+    trackRequestItemDelete: () => trackEvent(requestItemDelete()),
+  };
 };
 
 const EditItemWithTracking = withTracking(mapTrackingToProps)(EditItem);

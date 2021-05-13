@@ -7,7 +7,7 @@ import TitleBar from "../components/TitleBar";
 
 import "../styles/App.css";
 
-import { withTracking } from 'react-tracker';
+import { withTracking } from "react-tracker";
 import { navigateTo } from "../tracking/events/events";
 
 export let requestFor = "";
@@ -31,17 +31,7 @@ function ViewRequests(props) {
 
   return (
     <>
-      {/* <div className="library-fontello">
-        <i
-          className="icon-left-open back"
-          onClick={() => {
-            history.push("/volunteer-dashboard");
-          }}
-        ></i>
-      </div> */}
-      {/* <div class="title">Requests</div> */}
       <TitleBar title="Requests" selected="requests"></TitleBar>
-      {/* <Tabs className="tab-list" selected="requests"></Tabs> */}
       <div className="body">
         <h2>Requests for Today</h2>
         <div class="requests">
@@ -58,7 +48,7 @@ function ViewRequests(props) {
               <img alt="" src="\src\logo_light.png" />
             </div>
             <div class="req-item">
-              <div class="request-name">Mary's On-demand Request</div>
+              <div class="request-name">Mary's Request</div>
               <div class="request-time">6:00 P.M.</div>
             </div>
           </div>
@@ -69,15 +59,15 @@ function ViewRequests(props) {
           <div
             class="request-1-head"
             onClick={() => {
-              requestFor = "Mary";
+              requestFor = "Walt";
               handleListItem("request1");
-              history.push("/delivery-request");
+              history.push("/delivery-request-active");
               props.trackNavigation("SUBSCRIPTION_REQUEST");
             }}
           >
-            <div class="picture mary"></div>
+            <div class="picture walter"></div>
             <div class="req-item">
-              <div class="request-name">Mary's Subscription Request</div>
+              <div class="request-name">Walt's Request</div>
               <div class="request-time">8:00 P.M.</div>
             </div>
           </div>
@@ -95,11 +85,10 @@ function ViewRequests(props) {
   );
 }
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackNavigation: (pageName) =>
-      trackEvent(navigateTo(pageName)),
-  }
+    trackNavigation: (pageName) => trackEvent(navigateTo(pageName)),
+  };
 };
 
 const ViewRequestsWithTracking = withTracking(mapTrackingToProps)(ViewRequests);

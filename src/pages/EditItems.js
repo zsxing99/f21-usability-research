@@ -1,27 +1,33 @@
 import { useState } from "react";
 import { Form, Col, Button } from "react-bootstrap";
 import Item from "./Item";
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { updatedItems } from "./EditItem";
 import { initialItems } from "./DeliveryRequest2";
 import TitleBar from "../components/TitleBar";
 
-import { withTracking } from 'react-tracker';
+import { withTracking } from "react-tracker";
 import {
   navigateTo,
   newRequestItemDetailChange,
   newRequestItemDetailSubmit,
-} from '../tracking/events/events';
+} from "../tracking/events/events";
 
 export let editedItems = [];
 
 function EditItems(props) {
   const history = useHistory();
-  let generalList = updatedItems.length == 0 ? initialItems : updatedItems;
+  const loc = useLocation();
+  const requestFor = loc.state.requestFor;
+  const generalList = window.localStorage.getItem(requestFor + "-item-list")
+    ? JSON.parse(window.localStorage.getItem(requestFor + "-item-list"))
+    : initialItems;
+  //updatedItems.length == 0 ? initialItems : updatedItems;
   const [itemList, setItemList] = useState(generalList);
 
   const [itemName, setItemName] = useState("");
   const [itemQty, setItemQty] = useState();
+  console.log("props location", loc);
 
   function handleAddItem(e) {
     console.log(itemList);
@@ -32,8 +38,21 @@ function EditItems(props) {
       setItemName("");
       setItemQty("");
     } else alert("Please enter information in all the fields");
-    
+
     props.trackNewRequestItemDetailSubmit();
+  }
+
+  function doneEditing(e) {
+    console.log(itemList);
+    console.log(window.localStorage.getItem(requestFor + "-item-list"));
+    window.localStorage.setItem(
+      requestFor + "-item-list",
+      JSON.stringify(itemList)
+    );
+    history.push({
+      pathname: "delivery-request-active",
+      state: { requestFor },
+    });
   }
 
   return (
@@ -92,7 +111,7 @@ function EditItems(props) {
             onClick={() => {
               history.push({
                 pathname: "/edit-item-list/item",
-                state: { item, itemList },
+                state: { item, itemList, requestFor },
               });
               props.trackNavigation("EDIT_REQUEST_ITEM_DETAILS");
             }}
@@ -100,23 +119,31 @@ function EditItems(props) {
             <Item item={item}></Item>
           </div>
         ))}
+        <br></br>
+        <div class="proceed-button" align="center">
+          <input
+            onClick={doneEditing}
+            type="submit"
+            className="btn-primary btn"
+            value="Done Editing"
+            id="submit"
+          ></input>
+        </div>
       </div>
     </>
   );
 }
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackNavigation: (pageName) =>
-      trackEvent(navigateTo(pageName)),
-    
+    trackNavigation: (pageName) => trackEvent(navigateTo(pageName)),
+
     trackNewRequestItemDetailChange: () =>
-      trackEvent(newRequestItemDetailChange()),    
+      trackEvent(newRequestItemDetailChange()),
 
     trackNewRequestItemDetailSubmit: () =>
       trackEvent(newRequestItemDetailSubmit()),
-
-  }
+  };
 };
 
 const EditItemsWithTracking = withTracking(mapTrackingToProps)(EditItems);

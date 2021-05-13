@@ -4,8 +4,8 @@ import { editedItems } from "./EditItems";
 import { requestFor } from "./ViewRequests";
 import TitleBar from "../components/TitleBar";
 
-import { withTracking } from 'react-tracker';
-import { 
+import { withTracking } from "react-tracker";
+import {
   navigateTo,
   markRequestAsDone,
   requestItemClick,
@@ -24,13 +24,17 @@ function DeliveryRequest2(props) {
     sent: sentMsg,
     received: [],
   };
-  const itemList = [
-    { itemName: "Organic Milk", itemQty: 1 },
-    { itemName: "Orange", itemQty: 1 },
+  const defaultItemList = [
+    { itemName: "Organic Milk", itemQty: 2 },
+    { itemName: "Orange", itemQty: 12 },
   ];
-  // console.log("Edited Items", editedItems);
+  const itemList = window.localStorage.getItem(requestFor + "-item-list")
+    ? JSON.parse(window.localStorage.getItem(requestFor + "-item-list"))
+    : defaultItemList;
 
-  initialItems = editedItems.length == 0 ? itemList : editedItems;
+  console.log("Edited Items", editedItems);
+
+  initialItems = itemList;
   function handleSubmit(event) {
     if (
       !event.target.elements.milk_available.checked ||
@@ -57,7 +61,7 @@ function DeliveryRequest2(props) {
   }
 
   function onClickItem() {
-    props.trackRequestItemClick();    
+    props.trackRequestItemClick();
   }
 
   function callAlert() {
@@ -96,7 +100,15 @@ function DeliveryRequest2(props) {
         <div class="proceed-button" align="center">
           <input
             onClick={() => {
-              history.push("/edit-item-list");
+              // history.push("/edit-item-list", requestFor);
+              history.push({
+                pathname: "/edit-item-list",
+                // search: "?update=true", // query string
+                state: {
+                  requestFor: requestFor,
+                  // items: initialItems,
+                },
+              });
               props.trackNavigation("EDIT_REQUEST_ITEMS");
             }}
             type="submit"
@@ -248,18 +260,15 @@ function DeliveryRequest2(props) {
   );
 }
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackNavigation: (pageName) =>
-      trackEvent(navigateTo(pageName)),
-    trackRequestItemClick: () =>
-      trackEvent(requestItemClick()),
-    trackMarkRequestAsDone: () =>
-      trackEvent(markRequestAsDone()),
-  }
-}
+    trackNavigation: (pageName) => trackEvent(navigateTo(pageName)),
+    trackRequestItemClick: () => trackEvent(requestItemClick()),
+    trackMarkRequestAsDone: () => trackEvent(markRequestAsDone()),
+  };
+};
 
-const DeliveryRequest2WithTracking = withTracking(mapTrackingToProps)(DeliveryRequest2);
+const DeliveryRequest2WithTracking =
+  withTracking(mapTrackingToProps)(DeliveryRequest2);
 
 export default DeliveryRequest2WithTracking;
-
