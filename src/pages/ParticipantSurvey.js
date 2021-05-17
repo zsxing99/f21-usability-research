@@ -6,7 +6,7 @@ import Modal from 'react-modal';
 import { sendResult } from '../utils/usabilityResult'; 
 import { getTaskGroup, getTask } from '../utils/usabilityTasks';
 
-const TASK_NUM = 5;
+const TASK_COUNT = 4;
 
 const customStyles = {
   content : {
@@ -42,7 +42,7 @@ const init = {
             an application. You can help us by participating in a usability testing activity.
             It will take only a few minutes. 
             <br/><br/>
-            You will be using an app meant for volunteers interested in helping out individuals in need.  Volunteers can deliver essentials to people who cannot get out of their homes. You will go through the activity by performing 5 tasks. After each task, you will take a short survey.
+            You will be using an app meant for volunteers interested in helping out individuals in need.  Volunteers can deliver essentials to people who cannot get out of their homes. You will go through the activity by performing ${TASK_COUNT} tasks. After each task, you will take a short survey.
             <br/><br/>
             Please click on <b>Begin</b> button when you are ready.
             `
@@ -125,7 +125,7 @@ const beginTask = (taskId) => {
   const taskGroup = localStorage.getItem('taskGroup');
   const task = getTask(taskGroup, taskId);
   return {
-    title: `Task ${taskId} out of 5`,
+    title: `Task ${taskId} out of ${TASK_COUNT}`,
     description: `${task.title}`,
     questions: [
       {
@@ -275,8 +275,7 @@ export default function ParticipantSurvey(props) {
     localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(surveyResults));
     
     localStorage.setItem('taskInProgress', false);    
-    if (taskId < TASK_NUM) {
-      localStorage.setItem('taskId', taskId + 1);
+    if (taskId < TASK_COUNT) {4      localStorage.setItem('taskId', taskId + 1);
       localStorage.setItem('taskComplete', false);
       setTaskId(taskId + 1);
     } else {
