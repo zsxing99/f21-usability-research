@@ -2,8 +2,8 @@ import { useState } from "react";
 import { propTypes } from "react-bootstrap/esm/Image";
 import { useHistory } from "react-router-dom";
 
-import { withTracking } from 'react-tracker';
-import { navigateBack } from '../tracking/events/events';
+import { withTracking } from "react-tracker";
+import { navigateBack } from "../tracking/events/events";
 
 function Chat(props) {
   const history = useHistory();
@@ -14,30 +14,33 @@ function Chat(props) {
   const [sentMsg, setSentMsg] = useState(history.location.state.sent);
   return (
     <>
-      <div className="library-fontello">
-        {/* <div class="back"> */}
-        <i
-          className="icon-left-open back"
-          onClick={() => {
-            history.push("/delivery-request-active");
-            props.trackBackNavigation();
-          }}
-        ></i>
-        {/* </div> */}
-      </div>
-      {/* <div class="chat-header"></div> */}
-      <div class="title">
+      <div className="chat-header" align="center">
+        <div className="library-fontello">
+          {/* <div class="back"> */}
+          <i
+            className="icon-left-open back"
+            onClick={() => {
+              history.push("/delivery-request-active");
+              props.trackBackNavigation();
+            }}
+          ></i>
+        </div>
         <h1>{chatTitle}</h1>
       </div>
-      {/* <div class="received-message">{receivedMsg[0]}</div> */}
-      {/* <div class="received-message">{receivedMsg[0]}</div> */}
-      {/* <div class="received-msg-timestamp">12/7/2020 1:48 AM</div> */}
       <div class="sent-text">
         <div class="sent-message">{sentMsg[0]}</div>
-        <div class="sent-msg-timestamp">12/7/2020 1:48 AM</div>
       </div>
+      <br></br>
+      <div className="second-message">
+        {receivedMsg[0] ? (
+          <div class="received-message">{receivedMsg[0]}</div>
+        ) : (
+          <div></div>
+        )}
+      </div>
+      {/* <div class="received-message">{receivedMsg[0]}</div> */}
       <textarea
-        class="text-input"
+        className="text-input"
         rows="1"
         cols="40"
         name="textarea"
@@ -47,11 +50,10 @@ function Chat(props) {
   );
 }
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackBackNavigation: () =>
-      trackEvent(navigateBack()),
-  }
+    trackBackNavigation: () => trackEvent(navigateBack()),
+  };
 };
 
 const ChatWithTracking = withTracking(mapTrackingToProps)(Chat);

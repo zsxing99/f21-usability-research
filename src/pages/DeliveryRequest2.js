@@ -15,14 +15,22 @@ export let initialItems = [];
 function DeliveryRequest2(props) {
   const history = useHistory();
   const sentMsg = [
-    requestFor +
-      ",I am about to get you your groceries for this week, you specified you need: Organic Milk - 1 gallon Yoghurt - 1 Do you want anything changed?",
+    "Hi " +
+      requestFor +
+      ", I am about to get you your groceries. Do you want anything changed? I will let you know if anything is unavailable.",
   ];
+
+  const receivedMsgs =
+    requestFor === "Walt"
+      ? [
+          "Hi! \n Could you make it just 1 milk please? Rest everything looks good, thank you so much!",
+        ]
+      : [];
 
   const chat = {
     title: requestFor + "'s Request",
     sent: sentMsg,
-    received: [],
+    received: receivedMsgs,
   };
   const defaultItemList = [
     { itemName: "Organic Milk", itemQty: 2 },
