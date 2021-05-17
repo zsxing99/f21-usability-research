@@ -10,22 +10,22 @@ export default function Info() {
     <>
       <TitleBar title="Help" selected="help"></TitleBar>
       <div class="body faq">
-        <h2>Subscription Request vs. On-demand Request</h2>
-        <h3>Subscription Request</h3>
+        <h2> About BenevoleBuddy</h2>
         <div>
-          A subscription request is a weekly/monthly request where the users put
-          in their weekly items and the volunteers reach out before starting to
-          shop to see if the user wants any items changed in the subscription
-          list.
+          BenevoleBuddy allows volunteers to help out individuals in need to get
+          essentials. The app helps volunteers deliver essential supplies to
+          people who cannot leave their homes.
         </div>
         <br></br>
-        <h3>On-demand Request</h3>
+        <h2>On-demand Request</h2>
         <div>
           This is a one-time request where the user requests a set of items for
-          a one-time delivery. <br></br>The only difference between the two
-          requests is that the subscription request requires you to send a
-          confirmation message to the user before you begin processing their
-          order.
+          a one-time delivery. The items can be groceries or medicines. The
+          volunteer can access the information of a request in the 'Requests'
+          tab. Volunteers can chat with the person being helped via the chat
+          feature in the request and discuss availability of items. Once
+          volunteers are done shopping and delivering, they can mark the request
+          as 'Done'.
         </div>
         <br></br>
         <h2>Volunteer Availability</h2>
