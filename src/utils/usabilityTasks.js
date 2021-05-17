@@ -14,28 +14,21 @@ const task2 = {
 
 const task3 = {
   id: '02',
-  title: 'Complete an On-demand Request',
-  scenario: 'Mary has requested some items as part of her ‘On-demand’ request. You went to a supermarket and delivered the items to Mary.',
-  description: 'Complete her on-demand request in the app.'
+  title: `Complete Mary's Request`,
+  scenario: 'Mary has requested some items to be delivered. You went to a supermarket and delivered the items to Mary.',
+  description: 'Complete her request in the app.'
 };
 
 const task4 = {
   id: '03',
-  title: 'Edit an Item in a Subscription Request',
-  scenario: 'It is time for Mary’s weekly subscription request. There are no changes to her order; thus, you went to a supermarket and delivered her items.',
-  description: 'Complete her subscription request.'
+  title: 'Edit Walt’s Request',
+  scenario: 'Walt has requested some items to be delivered. You went to a supermarket and noticed that there is only 1 milk left.',
+  description: 'Update the quantity of milk in Walt’s request in the app.'
 };
 
-const task5 = {
-  id: '04',
-  title: 'Complete a Subscription Request',
-  scenario: 'Mary has a weekly subscription request that she wants to modify. She texted, asking you to add 6 oranges to her subscription request.',
-  description: 'Use the app to change her request.'
-};
-
-const groupA = [task2, task1, task3, task4, task5];
-const groupB = [task1, task2, task4, task5, task3];
-const groupC = [task3, task1, task2, task4, task5];
+const groupA = [task2, task1, task3, task4];
+const groupB = [task1, task2, task4, task3];
+const groupC = [task3, task1, task2, task4];
 
 const taskGroupIds = ["A", "B", "C"];
 

@@ -2,6 +2,8 @@ import {v4 as uuidv4} from 'uuid';
 import { getTask } from './usabilityTasks';
 import axios from 'axios';
 
+const TASK_COUNT = 4;
+
 function createResultPayload() {
     var payload = {};
     const taskGroup = localStorage.getItem('taskGroup');
@@ -11,7 +13,7 @@ function createResultPayload() {
     payload.demographics.group = taskGroup
 
     var tasks = [];
-    for (var i=0; i<5; i++) {
+    for (var i=0; i<TASK_COUNT; i++) {
         var task = {};
 
         task.id = getTask(taskGroup, i+1).id;;
@@ -40,7 +42,10 @@ export function sendResult() {
     const proxyURL = 'https://damp-shelf-98234.herokuapp.com/';
 
     fetch(proxyURL + 'https://17vdvvwjlc.execute-api.us-east-2.amazonaws.com/prod/usability-data', requestOpts)
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response);
+            localStorage.clear();
+        })
         .catch(error => console.log(error));
 }
 

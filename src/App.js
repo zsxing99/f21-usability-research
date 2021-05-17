@@ -58,10 +58,12 @@ function App(props) {
   }, []);
 
   const onTestMenuClick = () => {
-    setIsVisible(true);
-    localStorage.setItem('taskComplete', true);
-    localStorage.setItem('taskInProgress', true);
-    window.location.href = "/volunteer-dashboard";
+    if (window.confirm('Are you sure you want to finish this task?')) {
+      setIsVisible(true);
+      localStorage.setItem('taskComplete', true);
+      localStorage.setItem('taskInProgress', true);
+      window.location.href = "/volunteer-dashboard";
+    }
   }
 
   // add default confirmation
