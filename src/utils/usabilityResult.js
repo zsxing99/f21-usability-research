@@ -42,7 +42,10 @@ export function sendResult() {
     const proxyURL = 'https://damp-shelf-98234.herokuapp.com/';
 
     fetch(proxyURL + 'https://17vdvvwjlc.execute-api.us-east-2.amazonaws.com/prod/usability-data', requestOpts)
-        .then(response => console.log(response))
+        .then(response => {
+            console.log(response);
+            localStorage.clear();
+        })
         .catch(error => console.log(error));
 }
 
