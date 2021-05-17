@@ -275,7 +275,8 @@ export default function ParticipantSurvey(props) {
     localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(surveyResults));
     
     localStorage.setItem('taskInProgress', false);    
-    if (taskId < TASK_COUNT) {4      localStorage.setItem('taskId', taskId + 1);
+    if (taskId < TASK_COUNT) {
+      localStorage.setItem('taskId', taskId + 1);
       localStorage.setItem('taskComplete', false);
       setTaskId(taskId + 1);
     } else {
