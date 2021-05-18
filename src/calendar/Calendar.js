@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { DayPilot, DayPilotCalendar } from "daypilot-pro-react";
 import "./CalendarStyles.css";
 
-import { withTracking } from 'react-tracker';
-import { 
+import { withTracking } from "react-tracker";
+import {
   availabilityChange,
   availabilityDetailChange,
   availabilityDetailSubmit,
-  availabilityDetailCancel 
-} from '../tracking/events/events';
+  availabilityDetailCancel,
+} from "../tracking/events/events";
 
 const styles = {
   left: {
@@ -18,29 +18,7 @@ const styles = {
   //   flexGrow: "1",
   // },
 };
-const eventList = [
-  // {
-  //   id: 1,
-  //   text: "Available",
-  //   start: "2020-12-06T10:30:00",
-  //   end: "2020-12-06T13:00:00",
-  //   backColor: "#AA767C",
-  // },
-  // {
-  //   id: 2,
-  //   text: "Available",
-  //   start: "2020-12-07T17:30:00",
-  //   end: "2020-12-07T19:30:00",
-  //   backColor: "#AA767C",
-  // },
-  // {
-  //   id: 3,
-  //   text: "Available",
-  //   start: "2020-12-09T16:00:00",
-  //   end: "2020-12-09T19:00:00",
-  //   backColor: "#AA767C",
-  // },
-];
+const eventList = [];
 class Calendar extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +45,7 @@ class Calendar extends Component {
         dp.clearSelection();
         let eventDesc = {
           id: DayPilot.guid(),
-          text: "Availabile",
+          text: "Available",
           start: args.start,
           end: args.end,
           backColor: "#AA767C",
@@ -126,19 +104,15 @@ class Calendar extends Component {
   }
 }
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackAvailabilityChange: () => 
-      trackEvent(availabilityChange()),
+    trackAvailabilityChange: () => trackEvent(availabilityChange()),
 
-    trackAvailabilityDetailChange: () => 
-      trackEvent(availabilityDetailChange()),
+    trackAvailabilityDetailChange: () => trackEvent(availabilityDetailChange()),
 
-    trackAvailabilityDetailSubmit: () =>
-      trackEvent(availabilityDetailSubmit()),
-    
-    trackAvailabilityDetailCancel: () => 
-      trackEvent(availabilityDetailCancel()),
+    trackAvailabilityDetailSubmit: () => trackEvent(availabilityDetailSubmit()),
+
+    trackAvailabilityDetailCancel: () => trackEvent(availabilityDetailCancel()),
   };
 };
 

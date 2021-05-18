@@ -6,10 +6,8 @@ import {
 } from "daypilot-pro-react";
 import "./CalendarStyles.css";
 
-import { withTracking } from 'react-tracker';
-import {
-  calendarClick
-} from '../tracking/events/events'
+import { withTracking } from "react-tracker";
+import { calendarClick } from "../tracking/events/events";
 
 const styles = {
   wrap: {
@@ -81,10 +79,9 @@ class Calendar extends Component {
   }
 }
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackCalendarClick: () =>
-      trackEvent(calendarClick()),
+    trackCalendarClick: () => trackEvent(calendarClick()),
   };
 };
 
