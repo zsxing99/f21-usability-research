@@ -9,7 +9,7 @@ const task2 = {
   id: "01",
   title: "Edit Health Status",
   scenario:
-    "You are a volunteer who wants to help with some existing requests.",
+    "You are a healthy volunteer with no medical conditions who wants to help with some existing requests.",
   description:
     "Use the app to provide the time slots that you’re available for volunteering.",
 };

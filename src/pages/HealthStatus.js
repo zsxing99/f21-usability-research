@@ -4,8 +4,8 @@ import TitleBar from "../components/TitleBar";
 import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
-import { withTracking } from 'react-tracker';
-import { statusSubmit, statusChange } from '../tracking/events/events'
+import { withTracking } from "react-tracker";
+import { statusSubmit, statusChange } from "../tracking/events/events";
 
 export let disableVolunteerFlag = false;
 
@@ -127,6 +127,10 @@ function HealthStatus(props) {
         <form onSubmit={handleSubmit}>
           <div>
             <h2>Current Health Conditions</h2>
+            <h3>
+              You will be able to enter your availability after updating your
+              health status.
+            </h3>
           </div>
           <br></br>
           <fieldset>
@@ -224,14 +228,11 @@ function HealthStatus(props) {
   );
 }
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackAvailabilityHealthStatusUpdate: () =>
-      trackEvent(statusSubmit()),
-    
-    trackHealthStatusChange: () => 
-      trackEvent(statusChange()),
+    trackAvailabilityHealthStatusUpdate: () => trackEvent(statusSubmit()),
 
+    trackHealthStatusChange: () => trackEvent(statusChange()),
   };
 };
 

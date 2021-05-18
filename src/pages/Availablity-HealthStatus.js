@@ -4,7 +4,7 @@ import TitleBar from "../components/TitleBar";
 import { useHistory } from "react-router-dom";
 import React, { useState } from "react";
 
-import { withTracking } from 'react-tracker';
+import { withTracking } from "react-tracker";
 import { availabilitySubmit } from "../tracking/events/events";
 
 export let disableVolunteerFlag = false;
@@ -13,7 +13,7 @@ function AvailablityHealthStatus(props) {
   const history = useHistory();
 
   function handleSubmit(event) {
-    alert("Data Updated");
+    alert("Your availability has been updated!");
     history.push("/volunteer-dashboard");
 
     event.preventDefault();
@@ -62,14 +62,14 @@ function AvailablityHealthStatus(props) {
   );
 }
 
-const mapTrackingToProps = trackEvent => {
+const mapTrackingToProps = (trackEvent) => {
   return {
-    trackAvailabilitySubmit: () =>
-      trackEvent(availabilitySubmit()),
-  
+    trackAvailabilitySubmit: () => trackEvent(availabilitySubmit()),
   };
 };
 
-const AvailabilityHealthStatusWithTracking = withTracking(mapTrackingToProps)(AvailablityHealthStatus);
+const AvailabilityHealthStatusWithTracking = withTracking(mapTrackingToProps)(
+  AvailablityHealthStatus
+);
 
 export default AvailabilityHealthStatusWithTracking;
