@@ -1,6 +1,5 @@
 import Item from "./Item";
 import { useHistory } from "react-router-dom";
-import { editedItems } from "./EditItems";
 import { requestFor } from "./ViewRequests";
 import TitleBar from "../components/TitleBar";
 
@@ -40,8 +39,6 @@ function DeliveryRequest2(props) {
     ? JSON.parse(window.localStorage.getItem(requestFor + "-item-list"))
     : defaultItemList;
 
-  console.log("Edited Items", editedItems);
-
   initialItems = itemList;
   function handleSubmit(event) {
     if (
@@ -72,27 +69,8 @@ function DeliveryRequest2(props) {
     props.trackRequestItemClick();
   }
 
-  function callAlert() {
-    // alert(" Are you sure you want to Call? Standard Carrier charges apply!");
-    // TODO: Disable volunteer and Redirect to Dashboard
-    // history.push("/delivery-request-active");
-    history.push("/info");
-    props.trackNavigation("HELP");
-  }
-
   return (
     <>
-      {/* <div className="library-fontello">
-        <i
-          className="icon-left-open back"
-          onClick={() => {
-            history.push("/view-volunteer-requests");
-          }}
-        ></i>
-      </div>
-      <div className="title">
-        <h1> {requestFor}'s Request</h1>
-      </div> */}
       <TitleBar
         selected="requests"
         title={requestFor + "'s Request"}
@@ -105,57 +83,36 @@ function DeliveryRequest2(props) {
             <Item item={item} onClick={onClickItem}></Item>
           </div>
         ))}
-        <div class="proceed-button" align="center">
-          <input
+      </div>
+
+      <div align="center" className="edit-item-actions">
+        <div className="edit-item-button">
+          <button
             onClick={() => {
-              // history.push("/edit-item-list", requestFor);
               history.push({
                 pathname: "/edit-item-list",
-                // search: "?update=true", // query string
                 state: {
                   requestFor: requestFor,
-                  // items: initialItems,
                 },
               });
               props.trackNavigation("EDIT_REQUEST_ITEMS");
             }}
-            type="submit"
-            className="btn-primary btn"
-            value="Edit Items"
-            id="submit"
-          ></input>
+          >
+            Edit
+          </button>
         </div>
-      </div>
-
-      <div class="end">
-        <div class="table">
-          <table>
-            <thead>
-              <tr>
-                <th>
-                  <div
-                    className="library-fontello"
-                    onClick={() => {
-                      history.push({ pathname: "/chat", state: chat });
-                      props.trackNavigation("REQUEST_CHAT");
-                    }}
-                  >
-                    <i class="icon-comment-alt"></i> Chat{" "}
-                  </div>
-                </th>
-                <th>
-                  <div className="library-fontello" onClick={callAlert}>
-                    <i class="icon-help-circled"></i> Help{" "}
-                  </div>
-                </th>
-                <th>
-                  <div className="library-fontello" onClick={clickDone}>
-                    <i className="icon-basket"></i> Done{" "}
-                  </div>
-                </th>
-              </tr>
-            </thead>
-          </table>
+        <div className="edit-item-button">
+          <button
+            onClick={() => {
+              history.push({ pathname: "/chat", state: chat });
+              props.trackNavigation("REQUEST_CHAT");
+            }}
+          >
+            Chat
+          </button>
+        </div>
+        <div className="edit-item-button">
+          <button onClick={clickDone}>Done</button>
         </div>
       </div>
     </>
