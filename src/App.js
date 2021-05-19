@@ -23,6 +23,7 @@ import DeliveryRequest from "./pages/DeliveryRequest";
 import Chat from "./pages/Chat";
 import Tabs from "./components/Tabs";
 import TestMenu from './components/TestMenu';
+import TaskHelpFooter from './components/TaskHelpFooter';
 
 import Subscription from "./pages/Subscription";
 
@@ -174,6 +175,7 @@ function App(props) {
         </Switch>
       {/* </Router> */}
       {/* </TrackerProvider> */}
+      <TaskHelpFooter/>
       <TestMenu onClick={onTestMenuClick}/>
     </Container>
     
