@@ -138,6 +138,8 @@ const beginTask = (taskId) => {
           <u>Task:</u> ${task.description}
           <br/><br/>
           Please click on <b>Begin Task</b> to start the task, and click on <b>Finish Task</b> button to end the task.
+          <br/><br/>
+          (If you want to view the task descriptions again during the test, click on <b>?</b> button.)
         `
       }
     ]
