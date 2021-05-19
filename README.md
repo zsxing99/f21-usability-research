@@ -1,4 +1,4 @@
-# Usability Researcg Project
+# Usability Research Project
 
 ## Operation Instructions
 
@@ -29,4 +29,5 @@ Click [link](https://company-205442.frontify.com/d/8Pnfq9AaB79x) to view the sty
 
 - The app is hosted using AWS Amplify
 - AWS Lambda is used for the serverless architecture to POST and GET experiment data, for which the documentation can be found in`/serverless`
+- `/serverless` contains a `.json` file that can be imported in Postman
 - The GET endpoint returns all results, TODO: paginate the results
