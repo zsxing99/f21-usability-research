@@ -1,0 +1,76 @@
+{
+	"info": {
+		"_postman_id": "cc3f32c0-722c-4bac-97e6-f6f25c1461fb",
+		"name": "Usability Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "POST Usability Data",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": \"88888778\",\r\n  \"demographics\": {\r\n    \"age\": \"25\",\r\n    \"gender\": \"M\"\r\n  },\r\n  \"tasks\": [\r\n    {\r\n      \"id\": \"00\",\r\n      \"events\": [\r\n        {\r\n          \"type\": \"STEP\",\r\n          \"data\": {\r\n            \"pageName\": \"AVAILABILITY_HEALTH_STATUS\",\r\n            \"interactionType\": \"click\",\r\n            \"actionType\": \"navigation\",\r\n            \"action\": \"User elected to navigate to AVAILABILITY_HEALTH_STATUS page.\"\r\n          },\r\n          \"timestamp\": \"2021-05-01T14:09:43-04:00\"\r\n        }\r\n      ],\r\n      \"survey\": [\"3\", \"4\", \"1\"]\r\n    },\r\n    {\r\n      \"id\": \"01\",\r\n      \"events\": [\r\n        {\r\n          \"type\": \"STEP\",\r\n          \"data\": {\r\n            \"pageName\": \"AVAILABILITY_HEALTH_STATUS\",\r\n            \"interactionType\": \"click\",\r\n            \"actionType\": \"navigation\",\r\n            \"action\": \"User elected to navigate to AVAILABILITY_HEALTH_STATUS page.\"\r\n          },\r\n          \"timestamp\": \"2021-05-01T14:09:43-04:00\"\r\n        },\r\n        {\r\n          \"type\": \"STEP\",\r\n          \"data\": {\r\n            \"pageName\": \"AVAILABILITY_HEALTH_STATUS\",\r\n            \"interactionType\": \"click\",\r\n            \"actionType\": \"navigation\",\r\n            \"action\": \"User elected to navigate to AVAILABILITY_HEALTH_STATUS page.\"\r\n          },\r\n          \"timestamp\": \"2021-05-01T14:09:43-04:00\"\r\n        }\r\n      ],\r\n      \"survey\": [\"2\", \"3\", \"4\"]\r\n    }\r\n  ]\r\n}\r\n"
+				},
+				"url": {
+					"raw": "https://17vdvvwjlc.execute-api.us-east-2.amazonaws.com/prod/usability-data",
+					"protocol": "https",
+					"host": [
+						"17vdvvwjlc",
+						"execute-api",
+						"us-east-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"usability-data"
+					]
+				},
+				"description": "This API is used inside the app to post usability experiment survey outcomes to the the AWS DynamoDB"
+			},
+			"response": []
+		},
+		{
+			"name": "GET Usability Data",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "content-type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://17vdvvwjlc.execute-api.us-east-2.amazonaws.com/prod/usability-data",
+					"protocol": "http",
+					"host": [
+						"17vdvvwjlc",
+						"execute-api",
+						"us-east-2",
+						"amazonaws",
+						"com"
+					],
+					"path": [
+						"prod",
+						"usability-data"
+					]
+				},
+				"description": "This API fetches all the usability experiment entries"
+			},
+			"response": []
+		}
+	]
+}
