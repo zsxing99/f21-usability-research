@@ -12,7 +12,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^4.5.3",
     "cors": "^2.8.5",
-    "daypilot-pro-react": "https://npm.daypilot.org/daypilot-pro-react/trial/2018.2.3297.tar.gz",
+    "daypilot-pro-react": "https://npm.daypilot.org/daypilot-pro-react/trial/2021.3.5084.tar.gz",
     "moment": "^2.29.1",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
