@@ -3,21 +3,21 @@ import { useState } from 'react';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import Modal from 'react-modal';
-import { sendResult } from '../utils/usabilityResult'; 
+import { sendResult } from '../utils/usabilityResult';
 import { getTaskGroup, getTask } from '../utils/usabilityTasks';
 
 const TASK_COUNT = 4;
 
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    transform             : 'translate(-50%, -50%)',
-    maxHeight             : '90vh',
-    maxWidth              : '90%',
-    overflowY             : 'auto',
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    transform: 'translate(-50%, -50%)',
+    maxHeight: '90vh',
+    maxWidth: '90%',
+    overflowY: 'auto',
   }
 };
 
@@ -146,73 +146,90 @@ const beginTask = (taskId) => {
   }
 };
 
-const usabilityChoices = [
-    {
-      value: 1,
-      text: "Strongly Disagree"
-    }, {
-      value: 2,
-      text: "Disagree"
-    }, {
-      value: 3,
-      text: "Indifferent"
-    }, {
-      value: 4,
-      text: "Agree"
-    }, {
-      value: 5,
-      text: "Strongly Agree"
-    }
+const positiveUsabilityChoices = [
+  {
+    value: 1,
+    text: "Strongly Disagree"
+  }, {
+    value: 2,
+    text: "Disagree"
+  }, {
+    value: 3,
+    text: "Indifferent"
+  }, {
+    value: 4,
+    text: "Agree"
+  }, {
+    value: 5,
+    text: "Strongly Agree"
+  }
 ];
 
+const negativeUsabilityChoices = [
+  {
+    value: 5,
+    text: "Strongly Disagree"
+  }, {
+    value: 4,
+    text: "Disagree"
+  }, {
+    value: 3,
+    text: "Indifferent"
+  }, {
+    value: 2,
+    text: "Agree"
+  }, {
+    value: 1,
+    text: "Strongly Agree"
+  }
+];
+
+const questionMap = new Map();
+questionMap.set('satisfaction-1', [
+  'I am satisfied with the system.',
+  'I found the system unpleasant to use.'
+]);
+questionMap.set('effectiveness-1', [
+  'I was able to use the system successfully.',
+  'I found some tasks cumbersome to complete.'
+]);
+questionMap.set('effectiveness-2', [
+  'The system allowed me to complete the tasks accurately.',
+  'I wish the system had provided more instructions.'
+]);
+questionMap.set('efficiency-1', [
+  'I was able to complete the tasks quickly.',
+  'I found some tasks unnecessary long.'
+]);
+questionMap.set('efficiency-2', [
+  'I was able to copmlete the tasks with a reasonable number of steps.',
+  'I found the system unnecessarily complex.'
+]);
+questionMap.set('learnability', [
+  'It was easy to learn to use this system.',
+  'I wish the system would have provided more information to help me better understand the outcomes of my actions.'
+]);
+
 const finishTask = (taskId) => {
+  // -1 : negative question
+  // 1  : positive question
+  const questionArray = []
+
+  questionMap.forEach((value, key, questionMap) => {
+    const idx = Math.floor(Math.random() * 2);
+    questionArray.push({
+      type: "dropdown",
+      name: key,
+      title: value[idx],
+      choices: idx == 0 ? positiveUsabilityChoices : negativeUsabilityChoices,
+      isRequired: true
+    })
+  })
+
   return {
     title: `Task ${taskId}`,
     description: `Usability Survey Questions`,
-    questions: [
-      {
-        type: "dropdown",
-        name: "efficiency-1",
-        title: "I was able to complete this task quickly.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "efficiency-2",
-        title: "I was able to complete the task with a reasonable number of steps.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "effectiveness-1",
-        title: "I was able to use the system without written instructions.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "effectiveness-2",
-        title: "I was able to perform this task successfully.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "satisfaction-1",
-        title: "It was pleasant to use the system to perform this task.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "satisfaction-2",
-        title: "The system worked the way I wanted it to work.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-    ]
+    questions: questionArray
   }
 };
 
@@ -234,7 +251,7 @@ export default function ParticipantSurvey(props) {
   const [isVisible, setIsVisible] = useState(JSON.parse(localStorage.getItem('taskComplete')));
   const [taskId, setTaskId] = useState(JSON.parse(localStorage.getItem('taskId')));
   const [isDone, setIsDone] = useState(false);
-  
+
   function onCompleteInit(result) {
     var demographics = {
       "age": result.data.age,
@@ -275,8 +292,7 @@ export default function ParticipantSurvey(props) {
       surveyResults.push(result.data[k]);
     }
     localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(surveyResults));
-    
-    localStorage.setItem('taskInProgress', false);    
+    localStorage.setItem('taskInProgress', false);
     if (taskId < TASK_COUNT) {
       localStorage.setItem('taskId', taskId + 1);
       localStorage.setItem('taskComplete', false);
@@ -323,13 +339,13 @@ export default function ParticipantSurvey(props) {
 
   survey = (
     <Survey.Survey
-        json={surveyJSON}
-        showCompletedPage={false}
-        onComplete={onComplete}
-        completeText={completeText}
-      />
+      json={surveyJSON}
+      showCompletedPage={false}
+      onComplete={onComplete}
+      completeText={completeText}
+    />
   );
-  
+
   useEffect(() => {
     const taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
     const taskInProgress = JSON.parse(localStorage.getItem('taskInProgress'));
@@ -342,17 +358,17 @@ export default function ParticipantSurvey(props) {
 
   // render survey
   var surveyRender = (
-      <Modal
-        isOpen={!localStorage.getItem('demographics') || isVisible}
-        style={customStyles}
-      >
-        {survey}
-      </Modal>
-    );
+    <Modal
+      isOpen={!localStorage.getItem('demographics') || isVisible}
+      style={customStyles}
+    >
+      {survey}
+    </Modal>
+  );
 
-    return (
-      <div>
-        {surveyRender}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {surveyRender}
+    </div>
+  );
+}
