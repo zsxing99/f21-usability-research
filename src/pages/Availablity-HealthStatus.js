@@ -6,6 +6,7 @@ import React, { useState } from "react";
 
 import { withTracking } from "react-tracker";
 import { availabilitySubmit } from "../tracking/events/events";
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export let disableVolunteerFlag = false;
 
@@ -13,7 +14,7 @@ function AvailablityHealthStatus(props) {
   const history = useHistory();
 
   function handleSubmit(event) {
-    alert("Your availability has been updated!");
+    alertWithTracking("Your availability has been updated!");
     history.push("/volunteer-dashboard");
 
     event.preventDefault();

@@ -6,6 +6,7 @@ import React, { useState } from "react";
 
 import { withTracking } from "react-tracker";
 import { statusSubmit, statusChange } from "../tracking/events/events";
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export let disableVolunteerFlag = false;
 
@@ -35,7 +36,7 @@ function HealthStatus(props) {
       !event.target.elements.bodyaches.checked &&
       !event.target.elements.nota.checked
     ) {
-      alert("Please check atleast one option");
+      alertWithTracking("Please check atleast one option");
     } else if (
       event.target.elements.breathe.checked ||
       event.target.elements.fever.checked ||
@@ -45,9 +46,9 @@ function HealthStatus(props) {
       event.target.elements.bodyaches.checked
     ) {
       if (event.target.elements.nota.checked) {
-        alert("Invalid selection");
+        alertWithTracking("Invalid selection");
       } else {
-        alert(
+        alertWithTracking(
           "Covid Symptoms observed. You are not eligible for volunteering. Account Disable for 14 days"
         );
         history.push("/locked", { lock: true });

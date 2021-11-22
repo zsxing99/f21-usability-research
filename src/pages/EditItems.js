@@ -12,6 +12,7 @@ import {
   newRequestItemDetailChange,
   newRequestItemDetailSubmit,
 } from "../tracking/events/events";
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export let editedItems = [];
 
@@ -37,7 +38,7 @@ function EditItems(props) {
       setItemList([...itemList, { itemName, itemQty }]);
       setItemName("");
       setItemQty("");
-    } else alert("Please enter information in all the fields");
+    } else alertWithTracking("Please enter information in all the fields");
 
     props.trackNewRequestItemDetailSubmit();
   }

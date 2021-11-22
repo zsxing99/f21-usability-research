@@ -14,6 +14,7 @@ import {
   requestItemDelete,
 } from "../tracking/events/events";
 import { propTypes } from "react-bootstrap/esm/Image";
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export let updatedItems = [];
 const EditItem = (props) => {
@@ -52,7 +53,7 @@ const EditItem = (props) => {
         state: { requestFor },
       });
     } else {
-      alert("Please enter proper information in all the fields");
+      alertWithTracking("Please enter proper information in all the fields");
     }
 
     props.trackRequestItemDetailSubmit();

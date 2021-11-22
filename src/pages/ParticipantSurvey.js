@@ -5,6 +5,7 @@ import 'survey-react/survey.css';
 import Modal from 'react-modal';
 import { sendResult } from '../utils/usabilityResult';
 import { getTaskGroup, getTask } from '../utils/usabilityTasks';
+import { resetAlertCount, getAlertCount } from '../tracking/wrapper/alert';
 
 const TASK_COUNT = 4;
 
@@ -285,6 +286,12 @@ export default function ParticipantSurvey(props) {
     // Reset events array
     events = [];
     localStorage.setItem('events', JSON.stringify(events));
+
+    // Store collected number of alerts
+    localStorage.setItem(`task${taskId}_alerts`, getAlertCount());
+
+    // Reset number of alerts
+    resetAlertCount();
 
     // Store collected survey results
     var surveyResults = [];

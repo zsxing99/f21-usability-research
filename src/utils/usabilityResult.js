@@ -19,6 +19,7 @@ function createResultPayload() {
         task.id = getTask(taskGroup, i+1).id;;
         task.events = JSON.parse(localStorage.getItem(`task${i+1}_events`));
         task.survey = JSON.parse(localStorage.getItem(`task${i+1}_surveyResults`));
+        task.alerts = parseInt(localStorage.getItem(`task${i+1}_alerts`));
 
         tasks.push(task);
     }

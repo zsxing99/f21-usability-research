@@ -9,21 +9,22 @@ import {
   markRequestAsDone,
   requestItemClick,
 } from "../tracking/events/events";
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export let initialItems = [];
 function DeliveryRequest2(props) {
   const history = useHistory();
   const sentMsg = [
     "Hi " +
-      requestFor +
-      ", I am about to get you your groceries. Do you want anything changed? I will let you know if anything is unavailable.",
+    requestFor +
+    ", I am about to get you your groceries. Do you want anything changed? I will let you know if anything is unavailable.",
   ];
 
   const receivedMsgs =
     requestFor === "Walt"
       ? [
-          "Hi! \n Could you make it just 1 milk please? Rest everything looks good, thank you so much!",
-        ]
+        "Hi! \n Could you make it just 1 milk please? Rest everything looks good, thank you so much!",
+      ]
       : [];
 
   const chat = {
@@ -45,7 +46,7 @@ function DeliveryRequest2(props) {
       !event.target.elements.milk_available.checked ||
       !event.target.elements.yoghurt_available.checked
     ) {
-      alert(
+      alertWithTracking(
         "You have not checked all the items. Are you sure you want to mark the Request as Done?"
       );
       history.push("/view-volunteer-requests");
@@ -53,14 +54,14 @@ function DeliveryRequest2(props) {
       event.target.elements.milk_available.checked &&
       event.target.elements.yoghurt_available.checked
     ) {
-      alert(" Are you sure you want to mark the Request as Done?");
+      alertWithTracking(" Are you sure you want to mark the Request as Done?");
       history.push("/view-volunteer-requests");
     }
     event.preventDefault();
   }
 
   function clickDone() {
-    alert(" Are you sure you want to mark the Request as Done?");
+    alertWithTracking(" Are you sure you want to mark the Request as Done?");
     history.push("/");
     props.trackMarkRequestAsDone();
   }

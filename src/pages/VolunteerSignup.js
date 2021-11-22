@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export default function VolunteerSignup() {
   const history = useHistory();
@@ -14,13 +15,13 @@ export default function VolunteerSignup() {
       event.target.elements.copd.checked ||
       event.target.elements.asthma.checked
     ) {
-      alert(
+      alertWithTracking(
         'Volunteer Registration Denied!\n ' +
           'Sorry you are not eligible to be a volunteer in the COVID pandemic situation'
       );
       history.push('/');
     } else {
-      alert('Volunteer Registration Successful!\n ' + 'Welcome Aboard');
+      alertWithTracking('Volunteer Registration Successful!\n ' + 'Welcome Aboard');
       history.push('/volunteer-dashboard');
     }
     event.preventDefault();
