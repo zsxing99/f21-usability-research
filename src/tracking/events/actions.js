@@ -7,7 +7,8 @@ const Action = Object.freeze({
     CANCEL:     "cancel",
     NAVIGATION: "navigation",
     BACK:       "back",  // gestures + browser back + app back
-    TASK_DESCRIPTION:       "task-description"
+    TASK_DESCRIPTION:       "task-description",
+    HELP: 'help'
 });
 
 export default Action;
