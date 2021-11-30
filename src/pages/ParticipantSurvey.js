@@ -185,47 +185,103 @@ const negativeUsabilityChoices = [
   }
 ];
 
-const questionMap = new Map();
-questionMap.set('satisfaction-1', [
-  'I am satisfied with the system.',
-  'I found the system unpleasant to use.'
-]);
-questionMap.set('effectiveness-1', [
-  'I was able to use the system successfully.',
-  'I found some tasks cumbersome to complete.'
-]);
-questionMap.set('effectiveness-2', [
-  'The system allowed me to complete the tasks accurately.',
-  'I wish the system had provided more instructions.'
-]);
-questionMap.set('efficiency-1', [
-  'I was able to complete the tasks quickly.',
-  'I found some tasks unnecessary long.'
-]);
-questionMap.set('efficiency-2', [
-  'I was able to copmlete the tasks with a reasonable number of steps.',
-  'I found the system unnecessarily complex.'
-]);
-questionMap.set('learnability', [
-  'It was easy to learn to use this system.',
-  'I wish the system would have provided more information to help me better understand the outcomes of my actions.'
-]);
-
-const finishTask = (taskId) => {
-  // -1 : negative question
-  // 1  : positive question
-  const questionArray = []
-
-  questionMap.forEach((value, key, questionMap) => {
-    const idx = Math.floor(Math.random() * 2);
-    questionArray.push({
+const finishTask = () => {
+  const questionArray = [
+    {
       type: "dropdown",
-      name: key,
-      title: value[idx],
-      choices: idx == 0 ? positiveUsabilityChoices : negativeUsabilityChoices,
+      name: "satisfaction-positive",
+      title: 'I am satisfied with the system.',
+      choices: positiveUsabilityChoices,
       isRequired: true
-    })
-  })
+    },
+    {
+      type: "dropdown",
+      name: "satisfaction-negative",
+      title: 'I found the system unpleasant to use.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "effectiveness-1-positive",
+      title: 'I was able to use the system successfully.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "effectiveness-1-negative",
+      title: 'I found some tasks cumbersome to complete.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "effectiveness-2-positive",
+      title: 'The system allowed me to complete the tasks accurately.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "effectiveness-2-negative",
+      title: 'I wish the system had provided more instructions.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "efficiency-1-positive",
+      title: 'I was able to complete the tasks quickly.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "efficiency-1-negative",
+      title: 'I found some tasks unnecessary long.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "efficiency-2-positive",
+      title: 'I was able to copmlete the tasks with a reasonable number of steps.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "efficiency-2-negative",
+      title: 'I found the system unnecessarily complex.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "learnability-positive",
+      title: 'It was easy to learn to use this system.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "learnability-negative",
+      title: 'I wish the system would have provided more information to help me better understand the outcomes of my actions.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    }
+  ];
+
+  let currentIndex = questionArray.length, randomIndex;
+
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [questionArray[currentIndex], questionArray[randomIndex]] = [
+      questionArray[randomIndex], questionArray[currentIndex]];
+  }
 
   return {
     title: `All Tasks`,
@@ -336,14 +392,15 @@ export default function ParticipantSurvey(props) {
     surveyJSON = init;
     onComplete = onCompleteInit;
   } else {
-    const taskId = JSON.parse(localStorage.getItem('taskId'));
+    let taskId = JSON.parse(localStorage.getItem('taskId'));
     let taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
 
     if (taskComplete && taskId < TASK_COUNT) {
       saveTaskResult(null);
-      taskComplete = false;
+      taskId = JSON.parse(localStorage.getItem('taskId'));
+      taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
     }
-
+    
     if (isDone) {
       surveyJSON = done;
       onComplete = onCompleteDone;
