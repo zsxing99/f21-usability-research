@@ -355,11 +355,12 @@ export default function ParticipantSurvey(props) {
 
     if (result !== null) {
       // Store collected survey results
-      var surveyResults = [];
-      for (let k in result.data) {
-        surveyResults.push(result.data[k]);
-      }
-      localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(surveyResults));
+      const orderedResult = Object.keys(result.data).sort().reduce((obj, key) => {
+        obj[key] = result.data[key];
+        return obj;
+      }, {});
+
+      localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(orderedResult));
     }
     localStorage.setItem('taskInProgress', false);
 
@@ -400,7 +401,7 @@ export default function ParticipantSurvey(props) {
       taskId = JSON.parse(localStorage.getItem('taskId'));
       taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
     }
-    
+
     if (isDone) {
       surveyJSON = done;
       onComplete = onCompleteDone;
