@@ -360,7 +360,7 @@ export default function ParticipantSurvey(props) {
         return obj;
       }, {});
 
-      localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(orderedResult));
+      localStorage.setItem(`surveyResults`, JSON.stringify(orderedResult));
     }
     localStorage.setItem('taskInProgress', false);
 

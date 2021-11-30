@@ -12,13 +12,14 @@ function createResultPayload() {
     payload.demographics.comment = localStorage.getItem('comment');
     payload.demographics.group = taskGroup
 
+    payload.survey = JSON.parse(localStorage.getItem(`surveyResults`));
+
     var tasks = [];
     for (var i=0; i<TASK_COUNT; i++) {
         var task = {};
 
         task.id = getTask(taskGroup, i+1).id;;
         task.events = JSON.parse(localStorage.getItem(`task${i+1}_events`));
-        task.survey = JSON.parse(localStorage.getItem(`task${i+1}_surveyResults`));
         task.alerts = parseInt(localStorage.getItem(`task${i+1}_alerts`));
 
         tasks.push(task);
