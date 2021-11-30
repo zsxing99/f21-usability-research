@@ -228,7 +228,7 @@ const finishTask = (taskId) => {
   })
 
   return {
-    title: `Task ${taskId}`,
+    title: `All Tasks`,
     description: `Usability Survey Questions`,
     questions: questionArray
   }
