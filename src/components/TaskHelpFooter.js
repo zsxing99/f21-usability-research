@@ -10,7 +10,7 @@ import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import Modal from 'react-modal';
 import { withTracking } from 'react-tracker';
-import { helpButtonClick } from '../tracking/events/events';
+import { taskDescriptionButtonClick } from '../tracking/events/events';
 
 const useStyles = makeStyles((theme) => ({
   bottomRight: {
@@ -76,7 +76,7 @@ function TestMenu(props) {
   const [isOpen, setIsOpen] = useState(false);
 
   const onClick = () => {
-    props.trackHelpButtonClick();
+    props.trackTaskDescriptionButtonClick();
     setIsOpen(true);
   };
   const onComplete = () => setIsOpen(false);
@@ -111,8 +111,8 @@ function TestMenu(props) {
 
 const mapTrackingToProps = trackEvent => {
   return {
-    trackHelpButtonClick: () => 
-      trackEvent(helpButtonClick())
+    trackTaskDescriptionButtonClick: () => 
+      trackEvent(taskDescriptionButtonClick())
   }
 };
 

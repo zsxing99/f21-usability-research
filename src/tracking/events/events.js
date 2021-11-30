@@ -24,14 +24,14 @@ export const navigateBack = () => {
 }
 
 /**
- * HELP BUTTON
+ * TASK DESCRIPTION BUTTON
  */
-export const helpButtonClick = () => {
+export const taskDescriptionButtonClick = () => {
     return step(
         null,
         Interaction.CLICK,
-        Action.HELP,
-        "User clicked on help button."
+        Action.TASK_DESCRIPTION,
+        "User clicked on task description button."
     )
 }
 
