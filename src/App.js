@@ -39,6 +39,7 @@ import { useState, useEffect } from "react";
 
 import { withTracking } from 'react-tracker';
 import { navigateBack } from './tracking/events/events';
+import { browserAlertTracking } from './tracking/wrapper/alert';
 
 function App(props) {
   const [isVisible, setIsVisible] = useState(false);
@@ -59,6 +60,7 @@ function App(props) {
   }, []);
 
   const onTestMenuClick = () => {
+    browserAlertTracking();
     if (window.confirm('Are you sure you want to finish this task?')) {
       setIsVisible(true);
       localStorage.setItem('taskComplete', true);
