@@ -279,6 +279,10 @@ export default function ParticipantSurvey(props) {
   }
 
   function onCompleteFinishTask(result) {
+    saveTaskResult(result);
+  }
+
+  function saveTaskResult(result) {
     // Store collected events
     var events = JSON.parse(localStorage.getItem('events'));
     localStorage.setItem(`task${taskId}_events`, JSON.stringify(events));
@@ -293,13 +297,16 @@ export default function ParticipantSurvey(props) {
     // Reset number of alerts
     resetAlertCount();
 
-    // Store collected survey results
-    var surveyResults = [];
-    for (let k in result.data) {
-      surveyResults.push(result.data[k]);
+    if (result !== null) {
+      // Store collected survey results
+      var surveyResults = [];
+      for (let k in result.data) {
+        surveyResults.push(result.data[k]);
+      }
+      localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(surveyResults));
     }
-    localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(surveyResults));
     localStorage.setItem('taskInProgress', false);
+
     if (taskId < TASK_COUNT) {
       localStorage.setItem('taskId', taskId + 1);
       localStorage.setItem('taskComplete', false);
@@ -330,7 +337,13 @@ export default function ParticipantSurvey(props) {
     onComplete = onCompleteInit;
   } else {
     const taskId = JSON.parse(localStorage.getItem('taskId'));
-    const taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
+    let taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
+
+    if (taskComplete && taskId < TASK_COUNT) {
+      saveTaskResult(null);
+      taskComplete = false;
+    }
+
     if (isDone) {
       surveyJSON = done;
       onComplete = onCompleteDone;
