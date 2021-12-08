@@ -9,10 +9,11 @@ import { withTracking } from 'react-tracker';
 import {
   navigateTo
 } from "../tracking/events/events";
+import { saveWaitTime } from "../tracking/wrapper/wait";
 
 function VolunteerDashboard(props) {
   const history = useHistory();
-  
+
   return (
     <>
       <ParticipantSurvey isVisible="true"></ParticipantSurvey>
@@ -59,8 +60,10 @@ function VolunteerDashboard(props) {
 
 const mapTrackingToProps = trackEvent => {
   return {
-    trackNavigation: (pageName) =>
-      trackEvent(navigateTo(pageName)),
+    trackNavigation: (pageName) => {
+      saveWaitTime();
+      trackEvent(navigateTo(pageName));
+    },
   }
 }
 

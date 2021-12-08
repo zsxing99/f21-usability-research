@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import { Link, useHistory } from 'react-router-dom';
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export default function Subscription(props) {
   const [streetAddress, setStreetAddress] = useState('');
@@ -28,7 +29,7 @@ export default function Subscription(props) {
       },
     ]);
     console.log(props.requests);
-    alert(
+    alertWithTracking(
       'We are matching nearby available volunteers for you. We will notify you when we find one!'
     );
     history.push('/user-home?from=test');

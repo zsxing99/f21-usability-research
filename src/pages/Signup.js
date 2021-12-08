@@ -1,12 +1,13 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export default function Signup() {
   const history = useHistory();
 
   function handleSubmit(event) {
     if (event.target.elements.username.value === 'Mary') {
-      alert('Registration Successful: Welcome Mary');
+      alertWithTracking('Registration Successful: Welcome Mary');
       history.push('/user-home');
     } else {
       window.location.reload(true);

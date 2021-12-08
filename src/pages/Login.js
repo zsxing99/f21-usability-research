@@ -1,23 +1,24 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { disableVolunteerFlag } from './Availablity-HealthStatus';
+import { alertWithTracking } from "../tracking/wrapper/alert";
 
 export default function Login() {
   const history = useHistory();
 
   function handleSubmit(event) {
     if (event.target.elements.username.value === 'Mary') {
-      alert('Login Successful: Welcome Mary!');
+      alertWithTracking('Login Successful: Welcome Mary!');
       history.push('/user-home');
     } else if (event.target.elements.username.value === 'Caleb') {
-      alert('Login Successful: Welcome Caleb!');
+      alertWithTracking('Login Successful: Welcome Caleb!');
       history.push('/volunteer-dashboard');
     } else if (
       event.target.elements.username.value === 'John' &&
       event.target.elements.usertyp.value === 'Volunteer' &&
       disableVolunteerFlag
     ) {
-      alert(
+      alertWithTracking(
         'Covid Symptoms were logged by you in last 14 days. Volunteer Account disabled. Take Care :)'
       );
       window.location.reload(true);

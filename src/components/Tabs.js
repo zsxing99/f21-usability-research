@@ -4,7 +4,8 @@ import React from "react";
 import "../styles/App.css";
 
 import { withTracking } from 'react-tracker';
-import { navigateTo } from '../tracking/events/events';
+import { navigateTo, helpButtonClick } from '../tracking/events/events';
+import { saveWaitTime } from '../tracking/wrapper/wait';
 
 function Tabs(props) {
   const history = useHistory();
@@ -64,6 +65,7 @@ function Tabs(props) {
   function goHelp(e) {
     if (props.selected !== "help") history.push("/info");
     props.trackNavigation("HELP");
+    props.trackHelpButtonClick();
   }
 
   return (
@@ -93,8 +95,12 @@ function Tabs(props) {
 
 const mapTrackingToProps = trackEvent => {
   return {
-    trackNavigation: (pageName) =>
-      trackEvent(navigateTo(pageName)),
+    trackNavigation: (pageName) => {
+      saveWaitTime();
+      trackEvent(navigateTo(pageName));
+    },
+    trackHelpButtonClick: () => 
+      trackEvent(helpButtonClick())
   }
 }
 

@@ -3,21 +3,22 @@ import { useState } from 'react';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 import Modal from 'react-modal';
-import { sendResult } from '../utils/usabilityResult'; 
+import { sendResult } from '../utils/usabilityResult';
 import { getTaskGroup, getTask } from '../utils/usabilityTasks';
+import { resetAlertCount, getAlertCount } from '../tracking/wrapper/alert';
 
 const TASK_COUNT = 4;
 
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    transform             : 'translate(-50%, -50%)',
-    maxHeight             : '90vh',
-    maxWidth              : '90%',
-    overflowY             : 'auto',
+  content: {
+    top: '50%',
+    left: '50%',
+    right: 'auto',
+    bottom: 'auto',
+    transform: 'translate(-50%, -50%)',
+    maxHeight: '90vh',
+    maxWidth: '90%',
+    overflowY: 'auto',
   }
 };
 
@@ -146,73 +147,146 @@ const beginTask = (taskId) => {
   }
 };
 
-const usabilityChoices = [
-    {
-      value: 1,
-      text: "Strongly Disagree"
-    }, {
-      value: 2,
-      text: "Disagree"
-    }, {
-      value: 3,
-      text: "Indifferent"
-    }, {
-      value: 4,
-      text: "Agree"
-    }, {
-      value: 5,
-      text: "Strongly Agree"
-    }
+const positiveUsabilityChoices = [
+  {
+    value: 1,
+    text: "Strongly Disagree"
+  }, {
+    value: 2,
+    text: "Disagree"
+  }, {
+    value: 3,
+    text: "Indifferent"
+  }, {
+    value: 4,
+    text: "Agree"
+  }, {
+    value: 5,
+    text: "Strongly Agree"
+  }
 ];
 
-const finishTask = (taskId) => {
+const negativeUsabilityChoices = [
+  {
+    value: 5,
+    text: "Strongly Disagree"
+  }, {
+    value: 4,
+    text: "Disagree"
+  }, {
+    value: 3,
+    text: "Indifferent"
+  }, {
+    value: 2,
+    text: "Agree"
+  }, {
+    value: 1,
+    text: "Strongly Agree"
+  }
+];
+
+const finishTask = () => {
+  const questionArray = [
+    {
+      type: "dropdown",
+      name: "satisfaction-positive",
+      title: 'I am satisfied with the system.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "satisfaction-negative",
+      title: 'I found the system unpleasant to use.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "effectiveness-1-positive",
+      title: 'I was able to use the system successfully.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "effectiveness-1-negative",
+      title: 'I found some tasks cumbersome to complete.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "effectiveness-2-positive",
+      title: 'The system allowed me to complete the tasks accurately.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "effectiveness-2-negative",
+      title: 'I wish the system had provided more instructions.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "efficiency-1-positive",
+      title: 'I was able to complete the tasks quickly.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "efficiency-1-negative",
+      title: 'I found some tasks unnecessary long.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "efficiency-2-positive",
+      title: 'I was able to copmlete the tasks with a reasonable number of steps.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "efficiency-2-negative",
+      title: 'I found the system unnecessarily complex.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "learnability-positive",
+      title: 'It was easy to learn to use this system.',
+      choices: positiveUsabilityChoices,
+      isRequired: true
+    },
+    {
+      type: "dropdown",
+      name: "learnability-negative",
+      title: 'I wish the system would have provided more information to help me better understand the outcomes of my actions.',
+      choices: negativeUsabilityChoices,
+      isRequired: true
+    }
+  ];
+
+  let currentIndex = questionArray.length, randomIndex;
+
+  while (currentIndex != 0) {
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    [questionArray[currentIndex], questionArray[randomIndex]] = [
+      questionArray[randomIndex], questionArray[currentIndex]];
+  }
+
   return {
-    title: `Task ${taskId}`,
+    title: `All Tasks`,
     description: `Usability Survey Questions`,
-    questions: [
-      {
-        type: "dropdown",
-        name: "efficiency-1",
-        title: "I was able to complete this task quickly.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "efficiency-2",
-        title: "I was able to complete the task with a reasonable number of steps.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "effectiveness-1",
-        title: "I was able to use the system without written instructions.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "effectiveness-2",
-        title: "I was able to perform this task successfully.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "satisfaction-1",
-        title: "It was pleasant to use the system to perform this task.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-      {
-        type: "dropdown",
-        name: "satisfaction-2",
-        title: "The system worked the way I wanted it to work.",
-        choices: usabilityChoices,
-        isRequired: true,
-      },
-    ]
+    questions: questionArray
   }
 };
 
@@ -234,7 +308,7 @@ export default function ParticipantSurvey(props) {
   const [isVisible, setIsVisible] = useState(JSON.parse(localStorage.getItem('taskComplete')));
   const [taskId, setTaskId] = useState(JSON.parse(localStorage.getItem('taskId')));
   const [isDone, setIsDone] = useState(false);
-  
+
   function onCompleteInit(result) {
     var demographics = {
       "age": result.data.age,
@@ -261,6 +335,10 @@ export default function ParticipantSurvey(props) {
   }
 
   function onCompleteFinishTask(result) {
+    saveTaskResult(result);
+  }
+
+  function saveTaskResult(result) {
     // Store collected events
     var events = JSON.parse(localStorage.getItem('events'));
     localStorage.setItem(`task${taskId}_events`, JSON.stringify(events));
@@ -269,14 +347,23 @@ export default function ParticipantSurvey(props) {
     events = [];
     localStorage.setItem('events', JSON.stringify(events));
 
-    // Store collected survey results
-    var surveyResults = [];
-    for (let k in result.data) {
-      surveyResults.push(result.data[k]);
+    // Store collected number of alerts
+    localStorage.setItem(`task${taskId}_alerts`, getAlertCount());
+
+    // Reset number of alerts
+    resetAlertCount();
+
+    if (result !== null) {
+      // Store collected survey results
+      const orderedResult = Object.keys(result.data).sort().reduce((obj, key) => {
+        obj[key] = result.data[key];
+        return obj;
+      }, {});
+
+      localStorage.setItem(`surveyResults`, JSON.stringify(orderedResult));
     }
-    localStorage.setItem(`task${taskId}_surveyResults`, JSON.stringify(surveyResults));
-    
-    localStorage.setItem('taskInProgress', false);    
+    localStorage.setItem('taskInProgress', false);
+
     if (taskId < TASK_COUNT) {
       localStorage.setItem('taskId', taskId + 1);
       localStorage.setItem('taskComplete', false);
@@ -287,7 +374,6 @@ export default function ParticipantSurvey(props) {
   }
 
   function onCompleteDone(result) {
-    console.log(result.data);
     var comment = result.data.comment ? result.data.comment : "";
     localStorage.setItem('comment', comment);
 
@@ -306,8 +392,15 @@ export default function ParticipantSurvey(props) {
     surveyJSON = init;
     onComplete = onCompleteInit;
   } else {
-    const taskId = JSON.parse(localStorage.getItem('taskId'));
-    const taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
+    let taskId = JSON.parse(localStorage.getItem('taskId'));
+    let taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
+
+    if (taskComplete && taskId < TASK_COUNT) {
+      saveTaskResult(null);
+      taskId = JSON.parse(localStorage.getItem('taskId'));
+      taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
+    }
+
     if (isDone) {
       surveyJSON = done;
       onComplete = onCompleteDone;
@@ -323,13 +416,13 @@ export default function ParticipantSurvey(props) {
 
   survey = (
     <Survey.Survey
-        json={surveyJSON}
-        showCompletedPage={false}
-        onComplete={onComplete}
-        completeText={completeText}
-      />
+      json={surveyJSON}
+      showCompletedPage={false}
+      onComplete={onComplete}
+      completeText={completeText}
+    />
   );
-  
+
   useEffect(() => {
     const taskComplete = JSON.parse(localStorage.getItem('taskComplete'));
     const taskInProgress = JSON.parse(localStorage.getItem('taskInProgress'));
@@ -342,17 +435,17 @@ export default function ParticipantSurvey(props) {
 
   // render survey
   var surveyRender = (
-      <Modal
-        isOpen={!localStorage.getItem('demographics') || isVisible}
-        style={customStyles}
-      >
-        {survey}
-      </Modal>
-    );
+    <Modal
+      isOpen={!localStorage.getItem('demographics') || isVisible}
+      style={customStyles}
+    >
+      {survey}
+    </Modal>
+  );
 
-    return (
-      <div>
-        {surveyRender}
-      </div>
-    );
-  }
+  return (
+    <div>
+      {surveyRender}
+    </div>
+  );
+}

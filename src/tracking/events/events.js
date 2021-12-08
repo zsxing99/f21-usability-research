@@ -24,6 +24,30 @@ export const navigateBack = () => {
 }
 
 /**
+ * HELP BUTTON
+ */
+ export const helpButtonClick = () => {
+    return step(
+        null,
+        Interaction.CLICK,
+        Action.HELP,
+        "User clicked on help button."
+    )
+}
+
+/**
+ * TASK DESCRIPTION BUTTON
+ */
+export const taskDescriptionButtonClick = () => {
+    return step(
+        null,
+        Interaction.CLICK,
+        Action.TASK_DESCRIPTION,
+        "User clicked on task description button."
+    )
+}
+
+/**
  * AVAILABILITY PAGE EVENTS
  */
 export const availabilitySubmit = () => {
