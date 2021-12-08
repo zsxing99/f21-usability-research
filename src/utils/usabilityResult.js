@@ -1,4 +1,4 @@
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { getTask } from './usabilityTasks';
 import axios from 'axios';
 
@@ -13,14 +13,16 @@ function createResultPayload() {
     payload.demographics.group = taskGroup
 
     payload.survey = JSON.parse(localStorage.getItem(`surveyResults`));
+    payload.totalWaitTime = parseInt(localStorage.getItem('total_wait_time'));
+    payload.numberOfWaits = parseInt(localStorage.getItem('number_of_waits'));
 
     var tasks = [];
-    for (var i=0; i<TASK_COUNT; i++) {
+    for (var i = 0; i < TASK_COUNT; i++) {
         var task = {};
 
-        task.id = getTask(taskGroup, i+1).id;;
-        task.events = JSON.parse(localStorage.getItem(`task${i+1}_events`));
-        task.alerts = parseInt(localStorage.getItem(`task${i+1}_alerts`));
+        task.id = getTask(taskGroup, i + 1).id;;
+        task.events = JSON.parse(localStorage.getItem(`task${i + 1}_events`));
+        task.alerts = parseInt(localStorage.getItem(`task${i + 1}_alerts`));
 
         tasks.push(task);
     }
@@ -35,7 +37,7 @@ export function sendResult() {
 
     const requestOpts = {
         method: 'POST',
-        headers: { 
+        headers: {
             'Content-Type': 'application/json',
         },
         body: JSON.stringify(payload),

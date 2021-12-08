@@ -13,6 +13,7 @@ import {
   newRequestItemDetailSubmit,
 } from "../tracking/events/events";
 import { alertWithTracking } from "../tracking/wrapper/alert";
+import { saveWaitTime } from "../tracking/wrapper/wait";
 
 export let editedItems = [];
 
@@ -137,7 +138,10 @@ function EditItems(props) {
 
 const mapTrackingToProps = (trackEvent) => {
   return {
-    trackNavigation: (pageName) => trackEvent(navigateTo(pageName)),
+    trackNavigation: (pageName) => {
+      saveWaitTime();
+      trackEvent(navigateTo(pageName));
+    },
 
     trackNewRequestItemDetailChange: () =>
       trackEvent(newRequestItemDetailChange()),

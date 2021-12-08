@@ -5,6 +5,7 @@ import "../styles/App.css";
 
 import { withTracking } from 'react-tracker';
 import { navigateTo, helpButtonClick } from '../tracking/events/events';
+import { saveWaitTime } from '../tracking/wrapper/wait';
 
 function Tabs(props) {
   const history = useHistory();
@@ -94,8 +95,10 @@ function Tabs(props) {
 
 const mapTrackingToProps = trackEvent => {
   return {
-    trackNavigation: (pageName) =>
-      trackEvent(navigateTo(pageName)),
+    trackNavigation: (pageName) => {
+      saveWaitTime();
+      trackEvent(navigateTo(pageName));
+    },
     trackHelpButtonClick: () => 
       trackEvent(helpButtonClick())
   }

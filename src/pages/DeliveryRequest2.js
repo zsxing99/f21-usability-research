@@ -10,6 +10,7 @@ import {
   requestItemClick,
 } from "../tracking/events/events";
 import { alertWithTracking } from "../tracking/wrapper/alert";
+import { saveWaitTime } from "../tracking/wrapper/wait";
 
 export let initialItems = [];
 function DeliveryRequest2(props) {
@@ -122,7 +123,10 @@ function DeliveryRequest2(props) {
 
 const mapTrackingToProps = (trackEvent) => {
   return {
-    trackNavigation: (pageName) => trackEvent(navigateTo(pageName)),
+    trackNavigation: (pageName) => {
+      saveWaitTime();
+      trackEvent(navigateTo(pageName));
+    },
     trackRequestItemClick: () => trackEvent(requestItemClick()),
     trackMarkRequestAsDone: () => trackEvent(markRequestAsDone()),
   };

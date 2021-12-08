@@ -9,6 +9,7 @@ import {
   markRequestAsDone,
   requestItemClick,
 } from "../tracking/events/events";
+import { saveWaitTime } from "../tracking/wrapper/wait";
 
 function DeliveryRequest(props) {
   const history = useHistory();
@@ -98,8 +99,10 @@ function DeliveryRequest(props) {
 
 const mapTrackingToProps = trackEvent => {
   return {
-    trackNavigation: (pageName) =>
-      trackEvent(navigateTo(pageName)),
+    trackNavigation: (pageName) => {
+      saveWaitTime();
+      trackEvent(navigateTo(pageName));
+    },
     trackRequestItemClick: () =>
       trackEvent(requestItemClick()),
     trackMarkRequestAsDone: () =>

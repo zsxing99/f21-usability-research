@@ -374,7 +374,6 @@ export default function ParticipantSurvey(props) {
   }
 
   function onCompleteDone(result) {
-    console.log(result.data);
     var comment = result.data.comment ? result.data.comment : "";
     localStorage.setItem('comment', comment);
 
