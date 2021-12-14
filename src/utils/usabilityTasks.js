@@ -26,7 +26,7 @@ const task4 = {
   id: "03",
   title: "Edit Walt’s Request",
   scenario:
-    "Walt has requested 2 milks to be delivered. However, he just used the chat functionality of the app to let you know that he would like only one. This needs to be updated before you go to the supermarket.",
+    "Walt has requested 2 milks to be delivered. However, he just used the chat functionality of the app to let you know the real amount that he want. This needs to be updated before you go to the supermarket.",
   description: "Update the quantity of milk in Walt’s request in the app.",
 };
 

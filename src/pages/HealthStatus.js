@@ -59,7 +59,9 @@ function HealthStatus(props) {
     }
     event.preventDefault();
 
-    props.trackAvailabilityHealthStatusUpdate();
+    props.trackAvailabilityHealthStatusUpdate(
+      event.target.elements.fever.checked
+    );
   }
 
   function submitDisabled(event) {
@@ -208,8 +210,8 @@ function HealthStatus(props) {
                 id="nota"
                 name="nota"
                 className="input-checkbox"
-                // onChange={handleCheckbox}
-                // checked={nota ? true : false}
+              // onChange={handleCheckbox}
+              // checked={nota ? true : false}
               />
               <label htmlFor="nota">None of the Above</label>
             </div>
@@ -231,7 +233,7 @@ function HealthStatus(props) {
 
 const mapTrackingToProps = (trackEvent) => {
   return {
-    trackAvailabilityHealthStatusUpdate: () => trackEvent(statusSubmit()),
+    trackAvailabilityHealthStatusUpdate: (isFeverChecked) => trackEvent(statusSubmit(isFeverChecked)),
 
     trackHealthStatusChange: () => trackEvent(statusChange()),
   };

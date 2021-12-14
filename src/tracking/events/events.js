@@ -98,12 +98,12 @@ export const availabilityDetailCancel = () => {
 /**
  * HEALTH STATUS PAGE EVENTS
  */
-export const statusSubmit = () => {
+export const statusSubmit = (isFeverChecked) => {
     return step(
         "HEALTH_STATUS",
         Interaction.CLICK,
         Action.SUBMIT,
-        "User elected to submit their health status changes."
+        `User elected to submit their health status changes, fever selected is ${isFeverChecked}.`
     )
 };
 
