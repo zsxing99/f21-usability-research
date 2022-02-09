@@ -27,6 +27,11 @@ import TaskHelpFooter from './components/TaskHelpFooter';
 
 import Subscription from "./pages/Subscription";
 
+import { ConsoleSpanExporter, SimpleSpanProcessor } from '@opentelemetry/sdk-trace-base';
+import { WebTracerProvider } from '@opentelemetry/sdk-trace-web';
+import { DocumentLoad } from '@opentelemetry/plugin-document-load';
+import { registerInstrumentations } from '@opentelemetry/instrumentation';
+
 import {
   BrowserRouter as Router,
   Switch,
@@ -40,6 +45,24 @@ import { useState, useEffect } from "react";
 import { withTracking } from 'react-tracker';
 import { navigateBack } from './tracking/events/events';
 import { browserAlertTracking } from './tracking/wrapper/alert';
+import {FetchInstrumentation} from "@opentelemetry/instrumentation-fetch";
+import {UserInteractionInstrumentation} from "@opentelemetry/instrumentation-user-interaction";
+
+const provider = new WebTracerProvider();
+provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
+
+// Registering instrumentations / plugins
+registerInstrumentations({
+  instrumentations: [
+    new DocumentLoad(),
+    new FetchInstrumentation(),
+    new UserInteractionInstrumentation({
+      eventNames: ['click', 'mousemove']
+    }),
+  ],
+});
+
+provider.register()
 
 function App(props) {
   const [isVisible, setIsVisible] = useState(false);
@@ -180,7 +203,7 @@ function App(props) {
       <TaskHelpFooter/>
       <TestMenu onClick={onTestMenuClick}/>
     </Container>
-    
+
   );
 }
 
